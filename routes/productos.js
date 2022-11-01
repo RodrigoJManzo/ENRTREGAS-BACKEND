@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {ContainerFS} from "../container/index.js"
+import { adminVerify } from "../middlewares/index.js";
 import { dateUtils } from "../utils/index.js";
 
  const router = Router()
@@ -19,7 +20,7 @@ router.get('/:id?', async (req,res)=>{
     
 })
 
-router.post('/', async (req, res)=>{
+router.post('/', adminVerify, async (req, res)=>{
     try {
         const {nombre, descripcion, codigo, foto, precio, stock } = req.body;
         const productoNuevo = {
@@ -40,7 +41,7 @@ router.post('/', async (req, res)=>{
 })
 
 
-router.put('/:id?', async (req,res)=>{
+router.put('/:id?', adminVerify, async (req,res)=>{
     try {
         const {id} = req.params
         const {nombre, descripcion, codigo, foto, precio, stock } = req.body
@@ -60,7 +61,7 @@ router.put('/:id?', async (req,res)=>{
     
 })
 
-router.delete('/', async (req, res)=>{
+router.delete('/', adminVerify, async (req, res)=>{
     try {
         const {id} = req.params
         await productos.deleteById(id)
