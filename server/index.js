@@ -2,7 +2,8 @@ import express from "express";
 import {create} from "express-handlebars";
 import { productRouter } from "../routes/index.js";
 import { cartRouter } from "../routes/index.js";
-
+import dotenv from 'dotenv';
+dotenv.config()
 
 const app = express();
 
@@ -23,8 +24,6 @@ app.use(`/api/carrito`, cartRouter)
 
 app.set(`view engine`, `.hbs`)
 app.set(`views`, `../views`)
-
-
 
 
 app.listen(PORT, ()=>{

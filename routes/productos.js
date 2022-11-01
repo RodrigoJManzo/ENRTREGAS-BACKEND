@@ -61,12 +61,12 @@ router.put('/:id?', adminVerify, async (req,res)=>{
     
 })
 
-router.delete('/', adminVerify, async (req, res)=>{
+router.delete('/:id?', adminVerify, async (req, res)=>{
     try {
         const {id} = req.params
         await productos.deleteById(id)
         const data = await productos.getAll()
-        res.send(data)
+        res.send(`El objeto con ID ${id} ha sido eliminado`, data)
     } catch (error) {
         console.log(error)
     }
