@@ -1,8 +1,7 @@
-const {Router, Request, Response} = require(`express`);
+import { Router } from "express";
+import CRUD from "../container/container.js";
 
 const router = Router()
-
-const CRUD = require("../container/container")
 
 const cart = new CRUD('cart')
 
@@ -42,4 +41,4 @@ router.delete('/:id?', async (req, res)=>{
     }
 })
 
-module.exports = router
+export {router as cartRouter}

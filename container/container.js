@@ -1,6 +1,7 @@
-const fSync = require('fs')
-const path = require('path')
-const { nextTick } = require('process')
+import fSync from "fs";
+import path from "path";
+import { nextTick } from "process";
+
 const fs = fSync.promises
 
 class CRUD{
@@ -103,4 +104,4 @@ class CRUD{
     }
 }
 
-module.exports = CRUD
+export default CRUD

@@ -1,8 +1,9 @@
-const {Router, Request, Response} = require(`express`);
+import {Router} from "express";
+import CRUD from "../container/container.js";
 
-const router = Router()
+ const router = Router()
 
-const CRUD = require("../container/container")
+// const CRUD = require("../container/container")
 
 const productos = new CRUD('Productos')
 
@@ -54,4 +55,4 @@ router.delete('/', async (req, res)=>{
     }
 })
 
-module.exports = router
+export {router as productRouter}
