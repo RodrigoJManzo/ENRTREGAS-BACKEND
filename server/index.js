@@ -1,10 +1,11 @@
-const express = require(`express`)
-const {create} = require (`express-handlebars`)
+import express from "express";
+import {create} from "express-handlebars";
+import { productRouter } from "../routes/index.js";
+import { cartRouter } from "../routes/index.js";
+
 
 const app = express();
 
-const cartRoutes = require(`../routes/cart`)
-const productRoutes = require(`../routes/productos`)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -17,8 +18,8 @@ const hbs = create({
 app.engine(`.hbs`, hbs.engine)
 app.use(express.static('public'))
 
-app.use(`/productos`, productRoutes)
-app.use(`/carrito`, cartRoutes)
+app.use(`/api/productos`, productRouter)
+app.use(`/api/carrito`, cartRouter)
 
 app.set(`view engine`, `.hbs`)
 app.set(`views`, `../views`)
