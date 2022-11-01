@@ -1,11 +1,12 @@
 import {Router} from "express";
-import CRUD from "../container/container.js";
+import {ContainerFS} from "../container/index.js"
+import { dateUtils } from "../utils/dateUtils.js";
 
  const router = Router()
 
 // const CRUD = require("../container/container")
 
-const productos = new CRUD('Productos')
+const productos = new ContainerFS('Productos')
 
 router.get('/:id?', async (req,res)=>{
     try {
@@ -21,8 +22,16 @@ router.get('/:id?', async (req,res)=>{
 
 router.post('/', async (req, res)=>{
     try {
-        const {timestamp, nombre, descripcion, codigo, foto, precio, stock } = req.body
-        await productos.save({timestamp, nombre, descripcion, codigo, foto, precio, stock})
+        const {nombre, descripcion, codigo, foto, precio, stock } = req.body
+        const productoNuevo = {
+            nombre, 
+            descripcion, 
+            codigo, 
+            foto, 
+            precio, 
+            stock,
+            timestamp: dateUtils.getTime()}
+        await productos.save(productoNuevo)
         const data = await productos.getAll()
         res.send(data)
     } catch (error) {
@@ -34,8 +43,8 @@ router.post('/', async (req, res)=>{
 router.put('/:id?', async (req,res)=>{
     try {
         const {id} = req.params
-        const {timestamp, nombre, descripcion, codigo, foto, precio, stock } = req.body
-        await productos.updateById({timestamp, nombre, descripcion, codigo, foto, precio, stock }, id)
+        const {nombre, descripcion, codigo, foto, precio, stock } = req.body
+        await productos.updateById({nombre, descripcion, codigo, foto, precio, stock, timestamp: dateUtils.getTime() }, id)
         const data = await productos.getAll()
         res.send(data)
     } catch (error) {

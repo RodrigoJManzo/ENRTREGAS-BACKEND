@@ -104,4 +104,4 @@ class CRUD{
     }
 }
 
-export default CRUD
+export {CRUD as ContainerFS}
