@@ -72,4 +72,4 @@ router.delete('/:id?', adminVerify, async (req, res)=>{
     }
 })
 
-export {router as productRouter}
+export {router as productRouter , productos}
