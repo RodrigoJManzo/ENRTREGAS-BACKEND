@@ -2,6 +2,7 @@ import express from "express";
 import {create} from "express-handlebars";
 import { productRouter } from "../routes/index.js";
 import { cartRouter } from "../routes/index.js";
+import {eRouter} from '../routes/index.js'
 import dotenv from 'dotenv';
 dotenv.config()
 
@@ -21,6 +22,7 @@ app.use(express.static('public'))
 
 app.use(`/api/productos`, productRouter)
 app.use(`/api/carrito`, cartRouter)
+app.use('*', eRouter)
 
 app.set(`view engine`, `.hbs`)
 app.set(`views`, `../views`)
