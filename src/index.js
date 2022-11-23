@@ -5,8 +5,7 @@ import cors from "cors";
 
 const app = express();
 
-// esto es para poder habilitar cors para un cliente externo, ejemplo cuando levantamos la app de react
-// bien podriamos convertirlo a un middleware en su archivo correspondiente y tener las propiedades que deseemos
+
 app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use(express.json());

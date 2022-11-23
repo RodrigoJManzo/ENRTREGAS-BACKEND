@@ -6,7 +6,7 @@ const init = async () => {
     mongoose.connect(config.DATABASES.mongo.url, {
       dbName: config.DATABASES.mongo.dbName,
     });
-    console.log("🗝️+ Connection with mongodb established 🙃");
+    console.log("Now you Are Connected To the Server");
   } catch (error) {
     console.log(error);
   }
