@@ -1,1 +1,0 @@
-export {adminVerify} from './adminVerify.js'
