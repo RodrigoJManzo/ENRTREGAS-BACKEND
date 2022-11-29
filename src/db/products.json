@@ -1,0 +1,32 @@
+[
+   {
+      "title": "Teclado Gamer",
+      "description": "Teclado Razer Chroma",
+      "code": "1234",
+      "thumbnail": "www.tecladorazer.jpg",
+      "price": 1456,
+      "stock": 12,
+      "timestamp": "28/11/2022 12:12:12",
+      "id": 1
+   },
+   {
+      "title": "Asus Rog Strix",
+      "description": "computadora portatil",
+      "code": "MDDFF",
+      "thumbnail": "www.asusrog.jpg",
+      "price": 34000,
+      "stock": 12,
+      "timestamp": "22/10/2022 13:14:14",
+      "id": 10
+   },
+   {
+      "title": "Monitor MSI Optix",
+      "description": "Monitor Hd",
+      "code": "aaererd",
+      "thumbnail": "wwww.monitor.jpg",
+      "price": 12000,
+      "stock": 3,
+      "timestamp": "28/10/2022 10:19:66",
+      "id": 3
+   }
+]
