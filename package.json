@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Intentando ser Programmer de a poquito",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
