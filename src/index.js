@@ -7,6 +7,7 @@ import session from "express-session"
 import {PassportAuth} from './middlewares/index.js'
 import passport from "passport";
 import cookieParser from 'cookie-parser'
+import _dirname from "./dirname.js";
 
 
 
@@ -22,10 +23,9 @@ app.use(session(
 app.use(cookieParser())
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(cors({ origin: "http://localhost:3000" }));
 app.engine('.handlebars', engine({defaultLayout: 'main'}));
-app.use(express.static("../public"));
-app.set("views", `../public/views`);
+app.use(express.static(_dirname + '/public'));
+app.set("views", _dirname + '/views');
 app.set('view engine', '.handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +33,10 @@ app.use("/api/auth",AuthRouter)
 app.use("/api/products", ProductRouter);
 app.use("/api/cart", CartRouter);
 app.get("/", (req,res)=>{
-  res.render("products-table")
+  res.render("home")
+})
+app.get("/login", (req, res)=>{
+  res.render('login')
 })
 
 const server = app.listen(config.SERVER.PORT, () =>

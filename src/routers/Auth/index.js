@@ -27,7 +27,7 @@ router.post('/', passport.authenticate('login', {}), async (req, res)=>{
 
     res.cookie('cookieUser', token, { maxAge: 60000, expires: true})
 
-    res.send({success: true, message: "logged In", user:req.user , token})
+    res.send({success: true, message: "logged In", user:req.user , token}).redirect("/")
 })
 
 
