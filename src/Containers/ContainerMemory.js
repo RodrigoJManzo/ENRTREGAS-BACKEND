@@ -21,7 +21,7 @@ class ContainerMemory {
   getById(id) {
     return this.elements.find((element) => element.id === id);
   }
-  // {price: 299, nombre: "producto modifci"}
+  
   updateById(id, newData) {
     const elementIndex = this.elements.findIndex((element) => element.id == id);
 

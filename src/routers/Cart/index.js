@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
   res.send({ success: true, cartId: cart.id });
 });
 
-// POST: '/:id/productos' - Para incorporar productos al carrito por su id de producto
+
 
 router.post("/:cartId/products", async (req, res) => {
   const { productId } = req.body;
@@ -36,7 +36,7 @@ router.post("/:cartId/products", async (req, res) => {
   if (!product)
     return res.send({ error: true, message: ERRORS_UTILS.MESSAGES.NO_PRODUCT });
 
-  // TODO
+
   cart.products.push(product);
 
   const updatedCart = await CartDao.updateById(cartId, cart);

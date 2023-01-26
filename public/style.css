@@ -1,0 +1,85 @@
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.title {
+    color: blue;
+    size: 4rem;
+    text-align: center;
+
+}
+
+#getProductsBtn {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #2c7b04;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    align-self: center;
+}
+
+#getProductsBtn span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+#getProductsBtn span:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+#getProductsBtn:hover span{
+    padding-right: 25px;
+}
+
+#getProductsBtn:hover span:after{
+    opacity: 1;
+    right: 0;
+}
+
+
+#productsContainer {
+    align-self: center;
+
+}
+
+.productTable {
+    align-self: center;
+    display: flex;
+    align-content: space-around;
+    justify-content: space-around;
+    border: 1px solid burlywood;
+    align-items: center;
+}
+
+.productTable,
+th,
+td {
+    border: 1px solid burlywood;
+}
+
+.table_title {
+    size: 3rem;
+    color: blue;
+    text-align: center;
+}
+
+.noProds {
+    color: red;
+}
