@@ -19,6 +19,11 @@ const config = {
       dbName: process.env.MONGO_DB_NAME,
     },
   },
+  NODEMAILER : {
+    Name:	'Joanne Steuber',
+    Username:	'joanne2@ethereal.email',
+    Password:	'mJEqtpuJbgv9UpeTHh',
+  }
 };
 
 export { config };
