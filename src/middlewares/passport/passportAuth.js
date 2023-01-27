@@ -1,7 +1,7 @@
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local'
-
 import { UserDao } from '../../Dao/index.js';
+import {logger} from '../../services/index.js'
 
 
 const init = ( ) =>{
@@ -35,7 +35,7 @@ const init = ( ) =>{
         done (null, userResponse)
 
       } catch (error) {
-        console.log(error);
+        logger.log(error);
         done(error)
       }
     }

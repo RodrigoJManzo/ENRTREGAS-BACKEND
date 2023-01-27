@@ -4,6 +4,7 @@ import { UserDao } from "../../Dao/index.js";
 import {jsonWtUtils} from '../../utils/index.js'
 import { createTransport } from "nodemailer";
 import { config} from "../../config/index.js"
+import { logger } from "../../services/index.js";
 
 
 const router = Router()
@@ -71,7 +72,7 @@ router.post("/signup", async (req, res) => {
     res.send({success:true})
 
   } catch (error) {
-    console.log(error)
+    logger.log(error)
   }
 });
 

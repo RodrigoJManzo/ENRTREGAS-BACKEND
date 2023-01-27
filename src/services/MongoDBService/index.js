@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { config } from "../../config/index.js";
+import { logger } from "../logger/winston.js";
 
 const init = async () => {
   try {
@@ -8,7 +9,7 @@ const init = async () => {
     });
     console.log("Now you Are Connected To the Server");
   } catch (error) {
-    console.log(error);
+    logger.log(error);
   }
 };
 

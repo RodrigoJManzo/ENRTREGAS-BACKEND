@@ -1,4 +1,5 @@
 import { UserDao } from "../Dao/index.js"
+import { logger } from "../services/index.js"
 import { jsonWtUtils } from "../utils/jsonWtUtils.js"
 
 const tokenValid = async (req, res, next) =>{
@@ -26,7 +27,7 @@ const tokenValid = async (req, res, next) =>{
         next()
 
     } catch (error) {
-        console.log(error)
+        logger.log(error)
         res.status(401).send("NOT AUTHORIZED")
         }
 }
