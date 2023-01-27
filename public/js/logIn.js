@@ -20,7 +20,7 @@ const login = async(e)=>{
             "Content-type" : "application/json"
         },
         method: "POST"
-    } )
+    } ).then(response => response.json)
 
     if(response.status === 200){
         return window.location.replace('/')

@@ -1,3 +1,4 @@
+import { logger } from "../../src/services";
 
 
 const logInForm = document.getElementById('signupForm');
@@ -20,15 +21,12 @@ const signup = async(e)=>{
         },
         method: "POST"
     } )
-
-    if(response.status === 200){
-        return window.location.replace('/')
-
+    .then(response => response.json)
+    .then(window.location.replace('/'))
+    .finally((error)=>{
+        logger.info(error)
     }
-
-    alert(`algo ha ocurrido`)
-
-    
+    )
 }
 
 logInForm.addEventListener('submit', signup) 
