@@ -76,14 +76,18 @@ router.post("/signup", async (req, res) => {
 });
 
 
-router.post('/', passport.authenticate('login', {}), async (req, res)=>{
+router.post('/', passport.authenticate('login', {}), async (req, res, next)=>{
     const {user} = req
 
     const token = jsonWtUtils.createToken(user, 'secret')
 
     res.cookie('cookieUser', token, { maxAge: 60000, expires: true})
 
-    res.send({success: true, message: "logged In", user:req.user , token}).redirect("/")
+
+
+    res.send({success: true, message: "logged In", user:req.user , token})
+
+    next=()=>{res.redirect('/')}
 })
 
 
