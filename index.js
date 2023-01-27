@@ -2,7 +2,6 @@ import express from "express";
 import {engine} from "express-handlebars"
 import { config } from "./src/config/index.js";
 import { ProductRouter, CartRouter, AuthRouter } from "./src/routers/index.js";
-import cors from "cors";
 import session from "express-session"
 import {PassportAuth} from './src/middlewares/index.js'
 import passport from "passport";
