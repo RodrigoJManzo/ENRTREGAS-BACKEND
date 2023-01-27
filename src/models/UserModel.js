@@ -8,6 +8,8 @@ const UserSchema = new Schema(
     name: { type: String, required: true, max: 100 },
     lastname:{type: String, required: true, max: 100 },
     email: {type: String, required: true, unique:true},
+    age:{type: Number, required:true, unique:true},
+    number:{type: Number, required:true, unique:true},
     password: { type: String, required: true, max: 150 },
     cart: {type: Schema.Types.ObjectId, ref: "carts"},
   },

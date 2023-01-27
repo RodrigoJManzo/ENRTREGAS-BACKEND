@@ -1,20 +1,19 @@
-import { response } from "express";
 
-const logInForm = document.getElementById('loginForm');
 
-const login = async(e)=>{
+const logInForm = document.getElementById('signupForm');
+
+const signup = async(e)=>{
     e.preventDefault()
 
     const data = new FormData(logInForm)
-
+    
     const credentials = {}
 
     for(const field of data){
         credentials[field[0]] = field[1]
         
     }
-
-    await fetch('/api/auth', {
+    await fetch('/api/auth/signup', {
         body: JSON.stringify(credentials),
         headers:{
             "Content-type" : "application/json"
@@ -24,9 +23,12 @@ const login = async(e)=>{
 
     if(response.status === 200){
         return window.location.replace('/')
+
     }
 
-    alert('Error en tu Password')
+    alert(`algo ha ocurrido`)
+
+    
 }
 
-logInForm.addEventListener('submit', login) 
+logInForm.addEventListener('submit', signup) 

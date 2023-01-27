@@ -27,7 +27,7 @@ router.post("/signup", async (req, res) => {
 
   try {
 
-    const {name, lastname, email, password} = req.body
+    const {name, lastname, age, number, email, password} = req.body
 
     const mailOptions = {
       from: 'MongoDb 3ra Entrega CoderHouse',
@@ -50,6 +50,8 @@ router.post("/signup", async (req, res) => {
         <tr>
           <th class="tg-9wq8">Nombre</th>
           <th class="tg-9wq8">Apellido</th>
+          <th class="tg-9wq8">Edad</th>
+          <th class="tg-9wq8">CellNumber</th>
           <th class="tg-9wq8">Email</th>
         </tr>
       </thead>
@@ -57,22 +59,24 @@ router.post("/signup", async (req, res) => {
         <tr>
           <td class="tg-9wq8">${name}</td>
           <td class="tg-9wq8">${lastname}</td>
+          <td class="tg-9wq8">${age}</td>
+          <td class="tg-9wq8">${number}</td>
           <td class="tg-9wq8">${email}</td>
         </tr>
       </tbody>
       </table>`
   }
     const info = await transporter.sendMail(mailOptions)
-    console.log(info)
+    logger.info(info)
 
-    if(!name || !lastname || !email || !password)
+    if(!name || !lastname || !age || !number|| !email || !password)
     return res.send({success: false})
-    await UserDao.save({name, lastname,email,password})
+    await UserDao.save({name, lastname, age, number,email,password})
 
     res.send({success:true})
 
   } catch (error) {
-    logger.log(error)
+    logger.error(error)
   }
 });
 
@@ -84,11 +88,14 @@ router.post('/', passport.authenticate('login', {}), async (req, res, next)=>{
 
     res.cookie('cookieUser', token, { maxAge: 60000, expires: true})
 
-
-
     res.send({success: true, message: "logged In", user:req.user , token})
 
-    next=()=>{res.redirect('/')}
+    next=()=>{
+      if(res.status === 200){res.redirect('/')
+    }else(error)=>{
+      logger.error(error)
+    }
+  }
 })
 
 

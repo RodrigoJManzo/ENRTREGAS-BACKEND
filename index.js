@@ -1,7 +1,7 @@
 import express from "express";
 import {engine} from "express-handlebars"
 import { config } from "./src/config/index.js";
-import { ProductRouter, CartRouter, AuthRouter } from "./src/routers/index.js";
+import { ProductRouter, CartRouter, AuthRouter} from "./src/routers/index.js";
 import session from "express-session"
 import {PassportAuth} from './src/middlewares/index.js'
 import passport from "passport";
@@ -23,8 +23,8 @@ app.use(cookieParser())
 app.use(passport.initialize())
 app.use(passport.session())
 app.engine('.handlebars', engine({defaultLayout: 'main'}));
-app.use(express.static(_dirname + '/public'));
-app.set("views", _dirname + '/views');
+app.use(express.static('./public/'));
+app.set("views", './src/views/');
 app.set('view engine', '.handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +36,10 @@ app.get("/", (req,res)=>{
 })
 app.get("/login", (req, res)=>{
   res.render('login')
+})
+
+app.get("/signup", (req, res)=>{
+  res.render('signup')
 })
 
 const server = app.listen(config.SERVER.PORT, () =>
