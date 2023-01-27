@@ -1,5 +1,4 @@
-import { logger } from "../../src/services";
-
+import path from "./relativeImportRef.js";
 
 const logInForm = document.getElementById('signupForm');
 
@@ -22,9 +21,9 @@ const signup = async(e)=>{
         method: "POST"
     } )
     .then(response => response.json)
-    .then(window.location.replace('/'))
+    .then(path.resolve('/'), {loggedin:true})
     .finally((error)=>{
-        logger.info(error)
+        console.log(error)
     }
     )
 }

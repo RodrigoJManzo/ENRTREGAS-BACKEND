@@ -2,3 +2,9 @@
 {"_message":"users validation failed","errors":{"age":{"kind":"required","message":"Path `age` is required.","name":"ValidatorError","path":"age","properties":{"message":"Path `age` is required.","path":"age","type":"required"}},"number":{"kind":"required","message":"Path `number` is required.","name":"ValidatorError","path":"number","properties":{"message":"Path `number` is required.","path":"number","type":"required"}}},"level":"error","message":"users validation failed: number: Path `number` is required., age: Path `age` is required.","name":"ValidationError"}
 {"code":"EENVELOPE","command":"API","level":"error"}
 {"code":"EENVELOPE","command":"API","level":"error"}
+{"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
+{"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
+{"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
+{"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
+{"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
+{"code":11000,"index":0,"keyPattern":{"number":1},"keyValue":{"number":9845646},"level":"error"}

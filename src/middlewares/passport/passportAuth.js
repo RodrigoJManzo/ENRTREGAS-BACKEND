@@ -1,7 +1,8 @@
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local'
 import { UserDao } from '../../Dao/index.js';
-import {logger} from '../../services/index.js'
+import {logger} from '../../services/index.js';
+
 
 
 const init = ( ) =>{
@@ -20,11 +21,17 @@ const init = ( ) =>{
       usernameField: 'email',
       passwordField: 'password',
       passReqToCallback: true,
+      
     }, async (req, email, password, done) =>{
+      
       try {
         if(!email || !password) return done(null, false)
+
         const user = await UserDao.getOne({email: email})
-        if(!user || user.password !== password) return done(null, false)
+
+        const match =  await user.matchPassword(password)
+
+        if(match) return done(null, user)
 
         const userResponse = {
           id: user._id,

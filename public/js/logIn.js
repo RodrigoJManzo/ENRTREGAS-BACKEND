@@ -1,4 +1,4 @@
-import { response } from "express";
+import { response } from "./relativeImportRef.js";
 
 const logInForm = document.getElementById('loginForm');
 
