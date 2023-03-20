@@ -14,11 +14,10 @@ const getAll = async (req, res) => {
     if (!product) {
       return res.send({ error: ERRORS_UTILS.MESSAGES.NO_PRODUCT });
     }
-
-    res.send(product);
+    res.render("products-table", {product});
   } catch (error) {
-    res.send({ error: "Internal server error" });
-  }
+    res.render("products-table");
+    }
 };
 
 const getById = async (req, res) => {
@@ -33,8 +32,6 @@ const createProduct = async (req, res) => {
   try {
     const { title, description, code, thumbnail, price, stock } = req.body;
 
-    // con el validador que creamos en el archivo joi validator, podemos invocar al método validateAsync y pasarle las propiedades que creemos seran nuestro producto, y si están bien, nos devolvera el objeto que guardamos en product
-    // si no, saltará al catch
     const product = await JOI_VALIDATOR.product.validateAsync({
       title,
       description,
@@ -49,8 +46,6 @@ const createProduct = async (req, res) => {
 
     res.send(createdProduct);
   } catch (error) {
-    // no seria recomendable guardar logs de errores de input de usuario, que genera joi
-    // normalmente guardariamos errores propios e internos del servidor
     await LOGGER_UTILS.addLog(error);
     res.send(error);
   }

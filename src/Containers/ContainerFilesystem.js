@@ -100,13 +100,7 @@ class ContainerFilesystem {
         ...newData,
       };
 
-      //   for (const key in newData) {
-      //     if (foundElement.hasOwnProperty(key)) {
-      //       foundElement[key] = newData[key];
-      //     }
-      //   }
-
-      await fs.promises.writeFile(
+         await fs.promises.writeFile(
         this.filePath,
         JSON.stringify(elements, null, 3)
       );

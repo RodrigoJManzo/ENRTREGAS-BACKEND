@@ -6,7 +6,7 @@ class MongoDBContainer {
   }
 
   async getAll() {
-    const response = await this.model.find();
+    const response = await this.model.find().lean();
     return response;
   }
 
@@ -16,8 +16,13 @@ class MongoDBContainer {
   }
 
   async getById(id) {
-    const response = await this.model.findById(id);
+    const response = await this.model.findById(id).lean();
 
+    return response;
+  }
+
+  async getOne(options) {
+    const response = await this.model.findOne(options).lean();
     return response;
   }
 
