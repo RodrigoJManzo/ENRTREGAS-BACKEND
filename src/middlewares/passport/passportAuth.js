@@ -1,6 +1,7 @@
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local'
 import { UserDao } from '../../Dao/index.js';
+import { UsersMongo } from '../../Dao/users/UsersMongo.js';
 import {logger} from '../../services/index.js';
 
 
@@ -8,7 +9,7 @@ import {logger} from '../../services/index.js';
 const init = ( ) =>{
 
   passport.serializeUser((user,done)=>{
-    done(null, user.id)
+    done(null, user._id)
   })
 
   passport.deserializeUser(async (id,done)=>{
@@ -27,11 +28,13 @@ const init = ( ) =>{
       try {
         if(!email || !password) return done(null, false)
 
+        const userObj = new UsersMongo()
         const user = await UserDao.getOne({email: email})
+        
 
-        const match =  await user.matchPassword(password)
+        const isMatch =  await userObj.matchPassword(password, user.password)
 
-        if(match) return done(null, user)
+        if(isMatch) return done(null, user)
 
         const userResponse = {
           id: user._id,

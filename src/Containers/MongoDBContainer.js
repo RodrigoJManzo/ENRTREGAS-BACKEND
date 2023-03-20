@@ -12,6 +12,7 @@ class MongoDBContainer {
 
   async save(element) {
     const response = await this.model.create(element);
+    console.log(response)
     return response;
   }
 

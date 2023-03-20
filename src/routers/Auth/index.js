@@ -29,6 +29,15 @@ router.post("/signup", async (req, res) => {
 
     const {name, lastname, age, number, email, password} = req.body
 
+    try {
+       const exist = await UserDao.getOne({email:email})
+       if(exist)
+       return('user already exist', res.send('user already exists'))
+    } catch (error) {
+      console.log(error)
+      
+    } if (name || lastname || email){}
+
     const mailOptions = {
       from: 'MongoDb 3ra Entrega CoderHouse',
       to: email,

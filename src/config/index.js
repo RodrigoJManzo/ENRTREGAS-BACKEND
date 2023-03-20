@@ -20,9 +20,9 @@ const config = {
     },
   },
   NODEMAILER : {
-    Name:	'Joanne Steuber',
-    Username:	'joanne2@ethereal.email',
-    Password:	'mJEqtpuJbgv9UpeTHh',
+    Name:	'Walter Aufderhar',
+    Username:	'walter.aufderhar@ethereal.email',
+    Password:	'qhutKFMhn5mZ3BnPSC',
   }
 };
 

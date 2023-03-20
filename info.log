@@ -8,3 +8,18 @@
 {"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
 {"code":11000,"index":0,"keyPattern":{"age":1},"keyValue":{"age":22},"level":"error"}
 {"code":11000,"index":0,"keyPattern":{"number":1},"keyValue":{"number":9845646},"level":"error"}
+{"code":"ECONNECTION","command":"EHLO","level":"error","response":"421 Timeout - closing connection","responseCode":421}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535 Authentication failed","responseCode":535}
+{"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"rosssomandddsdsdsdd69ster@gmail.com"},"level":"error"}
+{"_message":"users validation failed","errors":{"age":{"kind":"Number","message":"Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"CastError","path":"age","reason":{"actual":false,"code":"ERR_ASSERTION","expected":true,"generatedMessage":true,"operator":"=="},"stringValue":"\"2233asdasd322\"","value":"2233asdasd322","valueType":"string"}},"level":"error","message":"users validation failed: age: Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"ValidationError"}
+{"_message":"users validation failed","errors":{"age":{"kind":"Number","message":"Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"CastError","path":"age","reason":{"actual":false,"code":"ERR_ASSERTION","expected":true,"generatedMessage":true,"operator":"=="},"stringValue":"\"2233asdasd322\"","value":"2233asdasd322","valueType":"string"}},"level":"error","message":"users validation failed: age: Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"ValidationError"}
+{"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"kakakari@gmail.com"},"level":"error"}

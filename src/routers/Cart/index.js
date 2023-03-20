@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { DATE_UTILS, ERRORS_UTILS } from "../../utils/index.js";
 import { CartDao, ProductDao } from "../../Dao/index.js";
+import mongoose from 'mongoose'
 
 const router = Router();
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-
-  const cart = await CartDao.getById(id);
+   const cart = await CartDao.getById(id);
 
   res.send({ success: true, cart });
 });
