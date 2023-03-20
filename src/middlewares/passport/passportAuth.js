@@ -9,12 +9,16 @@ import {logger} from '../../services/index.js';
 const init = ( ) =>{
 
   passport.serializeUser((user,done)=>{
-    done(null, user._id)
+    done(null, user.id)
   })
 
   passport.deserializeUser(async (id,done)=>{
-    const user = await UserDao.getById(id)
-    done (null, user);
+    try {
+      const user = await UserDao.getOne({ _id: id });
+      done(null,user)
+    } catch (error) {
+      logger.log(error)
+    }
   })
 
   passport.use('login', new LocalStrategy(

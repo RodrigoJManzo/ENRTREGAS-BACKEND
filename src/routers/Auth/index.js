@@ -32,7 +32,10 @@ router.post("/signup", async (req, res) => {
     try {
        const exist = await UserDao.getOne({email:email})
        if(exist)
+       logger.log('USER ALREADY IN DATABASE', exist)
        return('user already exist', res.send('user already exists'))
+       
+
     } catch (error) {
       console.log(error)
       
