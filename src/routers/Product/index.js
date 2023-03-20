@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { verifyRole } from "../../middlewares/verifyRole.js";
 import { ProductController } from "../../controllers/index.js";
 import { tokenValid } from "../../middlewares/authMiddleware.js";
 
@@ -8,10 +7,10 @@ const router = Router();
 
 router.get("/",tokenValid, ProductController.getAll);
 
-router.get("/:id", ProductController.getById);
+router.get("/:id", tokenValid, ProductController.getById);
 
-router.post("/", verifyRole, ProductController.createProduct);
+router.post("/", tokenValid, ProductController.createProduct);
 
-router.delete("/:id", ProductController.deleteById);
+router.delete("/:id", tokenValid, ProductController.deleteById);
 
 export { router as ProductRouter };

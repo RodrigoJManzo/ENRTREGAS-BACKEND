@@ -1,4 +1,4 @@
-import { response } from "express";
+import { response } from "./relativeImportRef.js";
 
 const logInForm = document.getElementById('loginForm');
 
@@ -20,12 +20,13 @@ const login = async(e)=>{
             "Content-type" : "application/json"
         },
         method: "POST"
-    } )
+    } ).then(response => response.json)
 
     if(response.status === 200){
         return window.location.replace('/')
     }
 
+    alert('Error en tu Password')
 }
 
 logInForm.addEventListener('submit', login) 

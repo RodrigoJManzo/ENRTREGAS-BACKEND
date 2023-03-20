@@ -5,6 +5,7 @@ import {
   JOI_VALIDATOR,
   LOGGER_UTILS,
 } from "../../utils/index.js";
+import {logger} from '../../services/index.js'
 
 // /api/products
 const getAll = async (req, res) => {
@@ -47,6 +48,7 @@ const createProduct = async (req, res) => {
     res.send(createdProduct);
   } catch (error) {
     await LOGGER_UTILS.addLog(error);
+    logger.error(error)
     res.send(error);
   }
 };
@@ -59,7 +61,7 @@ const deleteById = async (req, res) => {
 
     res.send({ success: true });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     res.send({ error: "Ocurrio un error" });
   }
 };

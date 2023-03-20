@@ -12,7 +12,7 @@ body {
 
 }
 
-#getProductsBtn {
+.homeBTN {
     display: inline-block;
     border-radius: 4px;
     background-color: #2c7b04;
@@ -28,14 +28,14 @@ body {
     align-self: center;
 }
 
-#getProductsBtn span{
+.homeBTN span{
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-#getProductsBtn span:after{
+.homeBTN span:after{
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -44,11 +44,11 @@ body {
     transition: 0.5s;
 }
 
-#getProductsBtn:hover span{
+.homeBTN:hover span{
     padding-right: 25px;
 }
 
-#getProductsBtn:hover span:after{
+.homeBTN:hover span:after{
     opacity: 1;
     right: 0;
 }
