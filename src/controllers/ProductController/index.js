@@ -15,9 +15,9 @@ const getAll = async (req, res) => {
     if (!product) {
       return res.send({ error: ERRORS_UTILS.MESSAGES.NO_PRODUCT });
     }
-    res.render("products-table", {product});
+    res.send({product});
   } catch (error) {
-    res.render("products-table");
+    res.send(error);
     }
 };
 
@@ -56,12 +56,13 @@ const createProduct = async (req, res) => {
 const deleteById = async (req, res) => {
   try {
     const { id } = req.params;
-
+    console.log(id)
     await ProductDao.deleteById(id);
 
     res.send({ success: true });
+
   } catch (error) {
-    logger.error(error);
+    logger.error(error.message);
     res.send({ error: "Ocurrio un error" });
   }
 };

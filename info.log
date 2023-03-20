@@ -23,3 +23,10 @@
 {"_message":"users validation failed","errors":{"age":{"kind":"Number","message":"Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"CastError","path":"age","reason":{"actual":false,"code":"ERR_ASSERTION","expected":true,"generatedMessage":true,"operator":"=="},"stringValue":"\"2233asdasd322\"","value":"2233asdasd322","valueType":"string"}},"level":"error","message":"users validation failed: age: Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"ValidationError"}
 {"_message":"users validation failed","errors":{"age":{"kind":"Number","message":"Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"CastError","path":"age","reason":{"actual":false,"code":"ERR_ASSERTION","expected":true,"generatedMessage":true,"operator":"=="},"stringValue":"\"2233asdasd322\"","value":"2233asdasd322","valueType":"string"}},"level":"error","message":"users validation failed: age: Cast to Number failed for value \"2233asdasd322\" (type string) at path \"age\"","name":"ValidationError"}
 {"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"kakakari@gmail.com"},"level":"error"}
+{"_original":{"code":"123222222","description":"MONITOR GAMER","price":"1901","stock":"333","thumbnail":"monitorsamsung.com","timestamp":"20/3/2023 20:02:21","title":"MONITOR SAMSUNG"},"details":[{"context":{"key":"code","label":"code","limit":6,"value":"123222222"},"message":"\"code\" length must be less than or equal to 6 characters long","path":["code"],"type":"string.max"}],"level":"error"}
+{"level":"error"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}

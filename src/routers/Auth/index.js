@@ -100,6 +100,8 @@ router.post('/', passport.authenticate('login', {}), async (req, res, next)=>{
 
     res.cookie('cookieUser', token, { maxAge: 60000, expires: true})
 
+    logger.log('info','USER LOGGED IN')
+
     res.send({success: true, message: "logged In", user:req.user , token})
 
     next=()=>{

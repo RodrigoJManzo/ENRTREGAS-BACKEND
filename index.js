@@ -11,6 +11,7 @@ import _dirname from "./src/dirname.js";
 
 
 const app = express();
+app.use(cookieParser())
 PassportAuth.init()
 app.use(session(
  { 
@@ -19,7 +20,6 @@ app.use(session(
   saveUninitialized: false,
   }
 ))
-app.use(cookieParser())
 app.use(passport.initialize())
 app.use(passport.session())
 app.engine('.handlebars', engine({defaultLayout: 'main'}));
