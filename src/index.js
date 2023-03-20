@@ -2,7 +2,6 @@ import express from "express";
 import {engine} from "express-handlebars"
 import { config } from "./config/index.js";
 import { ProductRouter, CartRouter, AuthRouter } from "./routers/index.js";
-import cors from "cors";
 import session from "express-session"
 import {PassportAuth} from './middlewares/index.js'
 import passport from "passport";
@@ -23,8 +22,8 @@ app.use(session(
 app.use(cookieParser())
 app.use(passport.initialize())
 app.use(passport.session())
-app.engine('.handlebars', engine({defaultLayout: 'main'}));
-app.use(express.static(_dirname + 'public'));
+app.engine('.handlebars', engine());
+app.use(express.static(_dirname + '/public'));
 app.set("views", _dirname + '/views');
 app.set('view engine', '.handlebars');
 app.use(express.json());
