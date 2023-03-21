@@ -32,6 +32,7 @@ const getById = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const { title, description, code, thumbnail, price, stock } = req.body;
+    
 
     const product = await JOI_VALIDATOR.product.validateAsync({
       title,

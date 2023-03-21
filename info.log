@@ -43,3 +43,7 @@
 {"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}
 {"level":"error","message":"Cannot read properties of undefined (reading 'findByIdAndDelete')"}
 {"level":"error","message":"Cast to ObjectId failed for value \":6418e737d6bffea6187e537c\" (type string) at path \"_id\" for model \"products\""}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
