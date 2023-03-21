@@ -1,0 +1,21 @@
+paths:
+  /api/products/{id}:
+    get:
+      summary: Get one product when given the Product ID
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          description: parameter takes the product id
+          required: true
+          type: string
+      responses:
+          "200":
+            description: The Product with the Id the user gave
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/Products'
+          "404":
+            description: PRODUCT NOT FOUND

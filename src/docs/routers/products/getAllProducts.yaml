@@ -1,0 +1,18 @@
+paths:
+  /api/products:
+    get:
+      summary: Get all products in the DB
+      tags:
+        - Products
+      parameters:
+          description: All the Products in the Data Base
+      responses:
+          "200":
+            description: All the Stored Products
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: '#/components/Products'
+          "404":
+            description: REQUEST ERROR

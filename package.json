@@ -1,12 +1,12 @@
 {
-  "name": "3ra-entrega",
+  "name": "entrega-final-backend",
   "version": "2.0.0",
-  "description": "Intentando ser Programmer de a poquito",
+  "description": "Una API que permite hacer CRUD de Productos y mantiene un chat por WebSocket, todo en persistencia con MongoDB, documentacion en Swagger y con un entorno visual en GraphQl",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon . -e 'yaml,js,json'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -29,6 +29,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
     "winston": "^3.8.2"
   },
   "devDependencies": {

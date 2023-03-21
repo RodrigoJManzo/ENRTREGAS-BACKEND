@@ -1,0 +1,37 @@
+components:
+  requestBodies:
+    NewProduct:
+      type: object
+      required:
+        - title
+        - description
+        - code
+        - thumbnail
+        - price
+        - stock
+      properties:
+        title:
+          type: string
+          description: Title of the Product
+        description:
+          type: string
+          description: Description of the Product
+        code:
+          type: string
+          description: code of the Product
+        thumbnail:
+          type: string
+          description: Picture of the Product
+        price:
+          type: string
+          description: Price of the Product
+        stock:
+          type: string
+          description: Stock of the Product
+      example:
+        title: Monitor Gamer Samsung
+        description: Monitor Gamer 165 hz
+        code: 234
+        thumbnail: www.gamersanmsung.com/monitorGamer
+        price: 120
+        stock: 33
