@@ -7,7 +7,7 @@ import {
 } from "../../utils/index.js";
 import {logger} from '../../services/index.js'
 
-// /api/products
+
 const getAll = async (req, res) => {
   try {
     const product = await ProductDao.getAll();
@@ -56,10 +56,11 @@ const createProduct = async (req, res) => {
 const deleteById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id)
+    
     await ProductDao.deleteById(id);
 
     res.send({ success: true });
+    logger.log('info', 'OBJECT DELETED')
 
   } catch (error) {
     logger.error(error.message);
