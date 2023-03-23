@@ -16,6 +16,6 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/Products'
+                  $ref: "#/components/schemas/Products"
           "404":
             description: PRODUCT NOT FOUND

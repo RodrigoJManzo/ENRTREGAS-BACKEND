@@ -13,6 +13,6 @@ paths:
               application/json:
                 schema:
                   items:
-                    $ref: '#/components/Products'
+                    $ref: "#/components/schemas/Products"
           "404":
             description: REQUEST ERROR

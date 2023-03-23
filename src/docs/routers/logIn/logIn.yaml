@@ -1,20 +1,20 @@
 paths:
-  /api/products:
+  /api/auth:
     post:
-      summary: creates a new product and stores it on MONGODB
+      summary: LogIn / must be an existing user on Data Base
       tags:
-        - Products
+        - Users
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/requestBodies/NewProduct"
+              $ref: "#/components/schemas/User"
         responses:
           "201":
-            description: Sucsses PRODUCT CREATED
+            description: Sucsses Logged In
             content:
               application/json:
                 schema:
                   items:
-                    $ref: "#/components/schemas/Products"
+                    $ref: "#/components/schemas/User"

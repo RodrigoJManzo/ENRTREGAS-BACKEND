@@ -1,0 +1,38 @@
+components:
+  requestBodies:
+    NewUser:
+      type: object
+      required:
+        - name
+        - lastname
+        - email
+        - age
+        - number
+        - password
+      properties:
+        name:
+          type: string
+          description: Name of the user
+        lastname:
+          type: string
+          description: Lastname of the user
+        email:
+          type: string
+          description: Email of the user / also the logIn name
+        age:
+          type: number
+          description: age of the user
+        number:
+          type: number
+          description: phone number of the user
+        password:
+          type: string
+          description: Password of the user
+      example:
+        name: Rodrigo
+        lastname: Manzo
+        email: something@something.com
+        age: 35 
+        number: 98123456
+        password: 123456
+        cart: LEAVE BLANK

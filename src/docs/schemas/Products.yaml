@@ -1,6 +1,6 @@
 components:
   schemas:
-    Product:
+    Products:
       type: object
       required:
         - title
