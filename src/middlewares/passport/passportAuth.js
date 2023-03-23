@@ -9,7 +9,7 @@ import {logger} from '../../services/index.js';
 const init = ( ) =>{
 
   passport.serializeUser((user,done)=>{
-    done(null, user.id)
+    done(null, user._id)
   })
 
   passport.deserializeUser(async (id,done)=>{

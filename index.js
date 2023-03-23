@@ -9,6 +9,8 @@ import cookieParser from 'cookie-parser'
 import _dirname from "./src/dirname.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from 'swagger-ui-express'
+import { ApolloServer } from "@apollo/server";
+import graphQlScheema from './src/graphql/schema.js'
 
 const swaggerOptions ={
   definition:{
@@ -48,17 +50,19 @@ app.use("/api/auth",AuthRouter)
 app.use("/api/products", ProductRouter);
 app.use("/api/cart", CartRouter);
 
-// app.get("/", (req,res)=>{
-//   res.render("home")
-// })
-// app.get("/login", (req, res)=>{
-//   res.render('login')
-// })
 
-// app.get("/signup", (req, res)=>{
-//   res.render('signup')
-// })
+const typeDefs = graphQlScheema.typeDefs
+const resolvers = graphQlScheema.resolvers
 
-const server = app.listen(config.SERVER.PORT, () =>
-  console.log(`Server running on port ${server.address().port} /// Info avaliable on /api/docs`)
-);
+ const apolloServer = new ApolloServer({typeDefs, resolvers})
+ //apolloServer.applyMiddleware({app})
+
+ const server = app.listen(config.SERVER.PORT, () =>
+   console.log(`Server running on port ${server.address().port} /// Info avaliable on /api/docs`)
+ );
+
+
+
+
+
+
