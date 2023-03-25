@@ -1,7 +1,7 @@
 import express from "express";
 import {engine} from "express-handlebars"
 import { config } from "./src/config/index.js";
-import { ProductRouter, CartRouter, AuthRouter} from "./src/routers/index.js";
+import { ProductRouter, CartRouter, AuthRouter, docRouter} from "./src/routers/index.js";
 import session from "express-session"
 import {PassportAuth} from './src/middlewares/index.js'
 import passport from "passport";
@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth",AuthRouter)
 app.use("/api/products", ProductRouter);
 app.use("/api/cart", CartRouter);
-
+app.use("/", docRouter)
 
 const typeDefs = graphQlScheema.typeDefs
 const resolvers = graphQlScheema.resolvers
