@@ -31,14 +31,12 @@ router.post("/signup", async (req, res) => {
 
     try {
        const exist = await UserDao.getOne({email:email})
-       if(exist)
-       logger.log('USER ALREADY IN DATABASE', exist)
-       return('user already exist', res.send('user already exists'))
-       
-
+       if(exist){
+        logger.log('USER ALREADY IN DATABASE', exist)
+        return('user already exist', res.send(`user already exists - User is = ${exist}`))
+       }
     } catch (error) {
-      console.log(error)
-      
+      console.log(error)      
     } if (name || lastname || email){}
 
     const mailOptions = {
