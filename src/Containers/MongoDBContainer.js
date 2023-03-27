@@ -17,7 +17,7 @@ class MongoDBContainer {
   }
 
   async getById(id) {
-    const response = await this.model.findById(id).lean();
+    const response = await this.model.findById(id);
 
     return response;
   }

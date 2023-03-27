@@ -22,7 +22,6 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
   const { id } = req.params;
-
   const product = await ProductDao.getById(id);
 
   res.send(product);

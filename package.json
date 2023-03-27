@@ -1,7 +1,7 @@
 {
   "name": "entrega-final-backend",
   "version": "2.0.0",
-  "description": "Una API que permite hacer CRUD de Productos y mantiene un chat por WebSocket, todo en persistencia con MongoDB, documentacion en Swagger y con un entorno visual en GraphQl",
+  "description": "Una API que permite hacer CRUD de Productos y mantiene un chat por WebSocket, todo en persistencia con MongoDB, documentacion en Swagger",
   "main": "index.js",
   "type": "module",
   "scripts": {
