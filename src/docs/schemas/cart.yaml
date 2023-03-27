@@ -1,7 +1,7 @@
 components:
   schemas:
     Cart:
-      type: cart
+      type: object
       properties:
         timestamp:
           type: string
