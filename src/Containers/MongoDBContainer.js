@@ -38,6 +38,40 @@ class MongoDBContainer {
     const response = await this.model.findByIdAndDelete(id);
     return response;
   }
+
+
+   async updateStockByCode (code, stock) {
+    try {
+      const updatedProduct = await this.model.findOneAndUpdate(
+        { code },
+        { $set: { stock } },
+        { new: true }
+      );
+      return updatedProduct;
+    } catch (error) {
+      throw new Error(`Error updating stock: ${error.message}`);
+    }
+  };
+  
+  async getByCode (code) {
+    try {
+      const product = await this.model.findOne({ code });
+      return product;
+    } catch (error) {
+      throw new Error(`Error getting product by code: ${error.message}`);
+    }
+  };
+
+  async updateStock (id, newStock) {
+    const result = await this.model.updateOne(
+      { _id: id },
+      { $set: { stock: newStock } }
+      
+    )
+    console.log(`id ${id} and stock ${newStock}`)
+    return result.nModified;
+  };
+
 }
 
 export { MongoDBContainer };

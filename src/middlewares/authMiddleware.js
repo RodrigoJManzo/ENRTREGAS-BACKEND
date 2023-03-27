@@ -7,7 +7,6 @@ const tokenValid = async (req, res, next) =>{
         
         const tokenGood = req.cookies.cookieUser
 
-        
 
         if(!tokenGood){
             throw new Error ('NOT AUTHORIZED TOKEN NOT PRESENT')
@@ -19,7 +18,7 @@ const tokenValid = async (req, res, next) =>{
             throw new Error ('NOT AUTHORIZED TOKEN NOT THE SAME')
         }
 
-        const user = await UserDao.getById(tokenTrue._id)
+        const user = await UserDao.getById(tokenTrue.id)
         
         if(!user){
             throw new Error ('NOT AUTHORIZED USER NOT PRESENT')

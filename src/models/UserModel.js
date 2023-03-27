@@ -13,7 +13,7 @@ const UserSchema = new Schema(
     age:{type: Number, required:true, unique:true},
     number:{type: Number, required:true, unique:true},
     password: { type: String, required: true, max: 150 },
-    cart: {type: Schema.Types.ObjectId, ref: "carts"},
+    cart: {type:Object, _id:{type:String}},
   },
   {
     virtuals: true,

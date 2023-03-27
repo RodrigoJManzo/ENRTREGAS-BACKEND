@@ -14,8 +14,9 @@ const createCart = async (req, res) => {
 
   const cart = await CartDao.save(baseCart);
 
-  res.send({ success: true, cartId: cart.id });
   logger.log('info', 'CART CREATED')
+  return({cartId: cart.id });
+  
 };
 
 
@@ -32,7 +33,8 @@ const addProductToCart = async (req, res) => {
   const product = await ProductDao.getById(productId);
 
   if (!product)
-    return res.send({ error: true, message: ERRORS_UTILS.MESSAGES.NO_PRODUCT });
+    return res.send({ error: true, message: error.message });
+    logger.log('warn', error.message)
 
 
   cart.products.push(product);

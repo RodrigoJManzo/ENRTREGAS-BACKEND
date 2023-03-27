@@ -1,9 +1,7 @@
 import { ProductDao } from "../../Dao/index.js";
 import {
   DATE_UTILS,
-  ERRORS_UTILS,
-  JOI_VALIDATOR,
-  LOGGER_UTILS,
+  JOI_VALIDATOR
 } from "../../utils/index.js";
 import {logger} from '../../services/index.js'
 
@@ -13,7 +11,8 @@ const getAll = async (req, res) => {
     const product = await ProductDao.getAll();
 
     if (!product) {
-      return res.send({ error: ERRORS_UTILS.MESSAGES.NO_PRODUCT });
+      logger.log('warn', error.message)
+      return res.send({ error: error.message });
     }
     res.send({product});
   } catch (error) {
@@ -33,24 +32,35 @@ const createProduct = async (req, res) => {
   try {
     const { title, description, code, thumbnail, price, stock } = req.body;
     
+    const existingProduct = await ProductDao.getByCode(code);
 
-    const product = await JOI_VALIDATOR.product.validateAsync({
-      title,
-      description,
-      code,
-      thumbnail,
-      price,
-      stock,
-      timestamp: DATE_UTILS.getTimestamp(),
-    });
+    if (existingProduct) {
+      // If product exists, update the stock
+      const id = existingProduct._id
+      const newStock = existingProduct.stock +1
+      const product  = await ProductDao.updateStock(id, newStock);
+      logger.log('info', `${existingProduct.title} stock updated`)
+      res.send('202', `stock updated`)
 
-    const createdProduct = await ProductDao.save(product);
+      } else {
+      // If product doesn't exist, create a new product
+      const product = await JOI_VALIDATOR.product.validateAsync({
+        title,
+        description,
+        code,
+        thumbnail,
+        price,
+        stock,
+        timestamp: DATE_UTILS.getTimestamp(),
+      }
+      )
+      const newProduct = await ProductDao.save(product);
+      res.send(newProduct);
+    }
 
-    res.send(createdProduct);
   } catch (error) {
-    await LOGGER_UTILS.addLog(error);
-    logger.error(error)
-    res.send(error);
+    logger.error('error', error.message)
+    res.send(error.message);
   }
 };
 
