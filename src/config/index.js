@@ -7,6 +7,7 @@ const CARTS_FILENAME = "carts";
 const config = {
   SERVER: {
     PORT: process.env.PORT || 8080,
+    WEBSOCKET_PORT: process.env.WBPORT || 3000 ,
     SELECTED_DATABASE: process.env.SELECTED_DB ?? "mongo",
   },
   DATABASES: {
