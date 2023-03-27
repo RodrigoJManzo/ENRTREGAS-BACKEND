@@ -1,9 +1,13 @@
 import { ChatMongo } from "../../Dao/chat/chatMongo.js";
 
 const renderChat = async (req, res) => {
-  res.render("chat", { email: req.user.email });
+  if(email){
+    res.render("chat", { email: req.user.email })
+  }else {
+    email = "uknownUser"
+    res.render("chat", { email: req.user.email })
+  }
 }
-
 
 const getChat = async  (req, res) => {
   
