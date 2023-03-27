@@ -1,0 +1,20 @@
+paths:
+  /api/cart/{id}/products:
+    post:
+      summary: adds a new Product to the Cart using product ID
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cart"
+        responses:
+          "201":
+            description: Sucsses PRODUCT CREATED
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: "#/components/schemas/Cart"

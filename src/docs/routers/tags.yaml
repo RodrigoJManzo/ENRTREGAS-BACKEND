@@ -3,3 +3,5 @@ tags:
     description: Add, Get, Delete Products
   - name: Users
     description: Create and LogIn Users
+  - name: Carts
+    description: addProduct to Cart, deleteProduct from cart, get cart

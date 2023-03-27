@@ -1,0 +1,21 @@
+paths:
+  /api/cart/{id}/products:
+    post:
+      summary: Deletes one product when given the Product ID
+      tags:
+        - Carts
+      parameters:
+        - name: ProductId
+          in: body
+          description: parameter takes the product id
+          required: true
+          type: string
+      responses:
+          "200":
+            description: Product Deleted
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Cart"
+          "404":
+            description: PRODUCT NOT FOUND

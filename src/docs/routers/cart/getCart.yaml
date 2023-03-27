@@ -1,0 +1,18 @@
+paths:
+  /api/cart/{id}:
+    get:
+      summary: Get all products in the DB one cart Given the Cart Id on params
+      tags:
+        - Carts
+      parameters:
+          description: Get one Cart with all the product it has
+      responses:
+          "200":
+            description: All the Stored Products
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: "#/components/schemas/Cart"
+          "404":
+            description: REQUEST ERROR

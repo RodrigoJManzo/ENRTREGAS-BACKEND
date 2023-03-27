@@ -1,0 +1,18 @@
+components:
+  schemas:
+    Cart:
+      type: cart
+      properties:
+        timestamp:
+          type: string
+          description: The exact time the cart was created
+        products:
+          type: array
+          description: An array where the products are added
+        id:
+          type: string
+          description: the id String that is used to manage the cart
+      example:
+        timestamp: 26/3/2023 21:01:28
+        products : []
+        id: 6420d07546b492581ff57fc3

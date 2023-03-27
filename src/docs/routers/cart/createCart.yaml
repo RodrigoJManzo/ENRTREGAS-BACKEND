@@ -1,0 +1,20 @@
+paths:
+  /api/cart:
+    post:
+      summary: creates a new Cart
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cart"
+        responses:
+          "201":
+            description: Sucsses cart Created
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: "#/components/schemas/Cart"
