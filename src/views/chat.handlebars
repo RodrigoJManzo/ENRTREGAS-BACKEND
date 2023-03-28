@@ -1,63 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Chat</title>
-  </head>
-  <body>
-    <h1>Chat</h1>
-    <p>Logged in as {{email}}</p>
 
-    <button type="button" onclick = 'window.location = "/"' id="homeBTN" class="homeBTN"><span>HOME</span></button>
+<h1>Chat</h1>
+<p>Logged in as {{email}}</p>
 
-    <div id="messages" style="height: 400px; overflow: scroll></div>
-    
-    <form id="message-form">
+<button type="button" onclick = 'window.location = "/"' id="homeBTN" class="homeBTN"><span>HOME</span></button>
 
-      <input type="text" id="messageBox" placeholder="Type your message here" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px;" />
+<div id="messages" style="height: 400px; overflow: scroll"></div>
 
-      <button id="send" title="Send Message!" style="width: 100%; height: 30px;">Send Message</button>
+<form id="message-form">
 
-    </form>
-    <script>
-  (function() {
-    const sendBtn = document.querySelector('#send');
-    const messages = document.querySelector('#messages');
-    const messageBox = document.querySelector('#messageBox');
+  <input type="text" id="messageBox" placeholder="Type your message here" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px;" />
 
-    let ws;
+  <button id="send" title="Send Message!">Send Message</button>
 
-    function showMessage(message) {
-      messages.textContent += `\n\n${message}`;
-      messages.scrollTop = messages.scrollHeight;
-      messageBox.value = '';
-    }
-
-    function init() {
-      if (ws) {
-        ws.onerror = ws.onopen = ws.onclose = null;
-        ws.close();
-      }
-
-      ws = new WebSocket('ws://localhost:8080');
-      ws.onopen = () => {
-        console.log('Connection opened!');
-      }
-      ws.onmessage = ({ data }) => showMessage(data);
-      ws.onclose = function() {
-        ws = null;
-      }
-    }
-
-    sendBtn.onclick = function() {
-      if (!ws) {
-        showMessage("No WebSocket connection :(");
-        return ;
-      }
-
-      ws.send(messageBox.value);
-      showMessage(messageBox.value);
-    }
-
-    init();
-  })();
-</script>
+</form>
+<script src="./client.js" type="module"></script>

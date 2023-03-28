@@ -54,21 +54,44 @@ app.use("/", AuthRouter)
 app.use("/chat", chatRouter)
 app.use('/api/docs', docRouter)
 
-import {WebSocketServer} from "ws"
-import  {createServer} from "http";
-const websocketServer = createServer(app)
-const wss = new WebSocketServer({ noServer:true, websocketServer})
 
-wss.on('connection', function conection (ws){
-  ws.on('message', function incoming(data){
-    wss.clients.forEach(function each(client){
-      if(client != ws  && client.readyState == WebSocket.OPEN){
-        client.send(data)
-      }
-    })
+import {Server as HttpServer} from "http"
+import {Server as IoServer  }from 'socket.io'
+import { ChatMongo } from "./src/Dao/chat/chatMongo.js";
+
+const httpServer = new HttpServer(app)
+
+const server = httpServer.listen(config.SERVER.PORT, () =>
+   console.log(`Server running on port ${server.address().port} /// Info avaliable on /api/docs`)
+ );
+
+server.on("error", (error)=> console.log(`Server Error ${error}`))
+
+
+const io = new IoServer(httpServer)
+
+
+io.on(`connection`, socket =>{
+  sendProductos(socket)
+  sendMensajes(socket)
+  console.log(`Cliente nuevo conectado`)
+  socket.on(`mensajeNuevo`, mensajeNuevo=>{
+      messageSaver(mensajeNuevo)
   })
 })
 
-const server = app.listen(config.SERVER.PORT, () =>
-   console.log(`Server running on port ${server.address().port} /// Info avaliable on /api/docs`)
- );
+const sendMensajes = async (socket)=>{
+  const allMsg = await ChatMongo.getAll()
+  socket.emit(`todosMensajes`, allMsg)
+}
+
+//Obtengo y Guardo mensajes 
+const messageSaver = async (mensaje)=>{
+  const date = new Date()
+  const fechaFormato = dayjs(date).format(`DD/MM/YYYY hh:mm:ss`)
+  const newMensaje = {...mensaje, date: `${fechaFormato} hs `}
+  await ChatMongo.save(newMensaje)
+  const messages = await ChatMongo.getAll()
+  io.sockets.emit(`todosMensajes`, messages)}
+
+
