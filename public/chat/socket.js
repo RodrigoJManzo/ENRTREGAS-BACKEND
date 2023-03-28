@@ -1,4 +1,4 @@
-import { io } from "../.."
+import  io  from "../.."
 const socket = io("http://localhost:3000")
 
 const chatForm = document.getElementById('message-form')

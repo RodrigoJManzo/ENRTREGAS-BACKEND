@@ -1,20 +1,43 @@
-<div>
+  <h2>Sign Up</h2>
+  <button type="button" onclick='window.location = "/"' id="homeBTN" class="homeBTN"><span>HOME</span></button>
+  <form id="signupForm" action="/signup" method="POST">
+    <input type="text" name="name" placeholder="Nombre" required />
+    <input type="text" name="lastname" placeholder="Apellido" required />
+    <input type="number" name="age" placeholder="Edad" required />
+    <input type="tel" name="number" placeholder="Telefono" required />
+    <input type="email" name="email" placeholder="email" required />
+    <input type="password" name="password" placeholder="Password" required />
 
-    <h2>Sign Up</h2>
-    <button type="button" onclick = 'window.location = "/"' id="homeBTN" class="homeBTN"><span>HOME</span></button>
-    <form id="signupForm" action="" method="">
+    <input type="submit" value="SignUp" />
+  </form>
 
-        <input type="name" name= "name" placeholder="Nombre"/>
-        <input type="lastname" name= "lastname" placeholder="Apellido"/>
-        <input type="age" name= "age" placeholder="Edad"/>
-        <input type="number" name= "number" placeholder="Telefono"/>
-        <input type="email" name= "email" placeholder="email"/>
-        <input type="password" name="password" placeholder="Password"/>
+{{!-- </div>
 
-        <input type="submit" value="SignUp"/>
+<script type="module" src="/js/signup.js"></script> --}}
 
-    </form>
+<script>
+  const form = document.querySelector('#signupForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-</div>
+    const name = form.elements['name'].value;
+    const lastname = form.elements['lastname'].value;
+    const age = form.elements['age'].value;
+    const number = form.elements['number'].value;
+    const email = form.elements['email'].value;
+    const password = form.elements['password'].value;
 
-<script type="module" src="/js/signup.js"></script>
+    const response = await fetch('/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, lastname, age, number, email, password })
+    });
+
+    if (response.ok) {
+      console.log('SignUp successful!');
+      window.location.href = '/'; // redirect to home page
+    } else {
+      console.log('Error during SignUp.');
+    }
+  });
+</script>
