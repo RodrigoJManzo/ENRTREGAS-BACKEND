@@ -1,0 +1,18 @@
+paths:
+  /chat:
+    get:
+      summary: Renders the View Chat and offers a interactive chat betweeen the users, each user is named after his own email, the one that comes inside {user}
+      tags:
+        - Chat
+      parameters:
+          description: Renders a WebSocket Chat 
+      responses:
+          "200":
+            description: Chat displayed correctly
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: "#/components/schemas/Chat"
+          "404":
+            description: REQUEST ERROR

@@ -24,6 +24,10 @@ const signUp =  async (req, res) => {
 
     const {name, lastname, age, number, email, password} = req.body
 
+    const data = {name, lastname, age, number, email, password}
+
+    console.log(`This is what im getting ${data.name}`)
+
     try {
       const validated = await JOI_VALIDATOR.user.validateAsync({
         name,
@@ -51,7 +55,7 @@ const signUp =  async (req, res) => {
     } if (name || lastname || email){}
 
     const mailOptions = {
-      from: 'MongoDb 3ra Entrega CoderHouse',
+      from: 'MongoDb Entrega Final de Coderhouse Backend',
       to: email,
       subject: "Mail de aviso de Login",
       html:`
@@ -99,7 +103,7 @@ const signUp =  async (req, res) => {
     res.send({success:true})
 
   } catch (error) {
-    logger.error('error', error.info)
+    logger.error('error', error)
   }
 };
 

@@ -4,7 +4,7 @@ import { tokenValid } from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", renderChat );
+router.get("/", tokenValid,  renderChat );
 
 
 

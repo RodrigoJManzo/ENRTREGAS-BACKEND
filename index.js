@@ -8,7 +8,8 @@ import passport from "passport";
 import cookieParser from 'cookie-parser'
 import _dirname from "./src/dirname.js";
 import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from 'swagger-ui-express'
+import swaggerUi from 'swagger-ui-express';
+import cors from "cors"
 
 
 const swaggerOptions ={
@@ -37,6 +38,7 @@ app.use(session(
   saveUninitialized: false,
   }
 ))
+app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
 app.engine('.handlebars', engine({defaultLayout: 'main'}));
@@ -48,37 +50,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth",AuthRouter)
 app.use("/api/products", ProductRouter);
 app.use("/api/cart", CartRouter);
-app.use("/", docRouter)
+app.use("/", AuthRouter)
 app.use("/chat", chatRouter)
+app.use('/api/docs', docRouter)
 
 import {Server as IOServer} from "socket.io"
 import { createServer as HttpServer } from "http";
-import { ChatMongo } from "./src/Dao/chat/chatMongo.js";
 import { chatRouter } from "./src/routers/chat/chatRouter.js";
+import { socketEvent } from "./public/chat/event.js";
 
-const chatMongo = new ChatMongo
 
 const httpServer = new HttpServer(app)
 
-const io = new IOServer(httpServer)
+export const io = new IOServer(httpServer)
 
-io.on("connection", (socket)=>{
-  console.log(`user connected`)
-  chatMongo.getAll().then((messages)=>{
-    socket.emit("messages", messages)
-  })
+socketEvent(io)
 
-  socket.on("message", (data)=>{
-    chatMongo.save(data).then((message)=>{
-      io.emit("message", message)
-    })
-  })
-
-  socket.on("disconnect", ()=>{
-    console.log(`user disconnected`)
-  })
-
-})
 
 httpServer.listen(config.SERVER.WEBSOCKET_PORT, ()=>{
   console.log(`WebSocket server running on port ${config.SERVER.WEBSOCKET_PORT}`)
@@ -88,9 +75,3 @@ httpServer.listen(config.SERVER.WEBSOCKET_PORT, ()=>{
 const server = app.listen(config.SERVER.PORT, () =>
    console.log(`Server running on port ${server.address().port} /// Info avaliable on /api/docs`)
  );
-
-
-
-
-
-

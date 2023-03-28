@@ -1,19 +1,4 @@
-import { ChatMongo } from "../Dao/chat/chatMongo"
-import { ChatModel } from "../models"
-
-const messages = await ChatMongo.getAll()
-
-
-export const socketEvent = (io) =>{
-  io.on('connection', socket =>{
-    io.sockets.emit('messages', messages)
-    socket.on('chat', chat =>{
-      const messages = await ChatMongo.save(chat)
-      io.sockets.emit('messages', messages)
-    })
-  })
-}
-
+import { io } from "../.."
 const socket = io("http://localhost:3000")
 
 const chatForm = document.getElementById('message-form')

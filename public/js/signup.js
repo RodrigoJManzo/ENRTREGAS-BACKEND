@@ -1,31 +1,31 @@
-import path from "./relativeImportRef.js";
+const form = document.getElementById('signupForm');
+const xhr = new XMLHttpRequest();
 
-const logInForm = document.getElementById('signupForm');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-const signup = async(e)=>{
-    e.preventDefault()
+  const formData = new FormData(form);
 
-    const data = new FormData(logInForm)
-    
-    const credentials = {}
+  console.log(formData)
 
-    for(const field of data){
-        credentials[field[0]] = field[1]
-        
+  xhr.open('POST', "/api/auth/signup");
+
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      if (data.success) {
+        console.log('Sign up successful!');
+        window.location.href = '/';
+      } else {
+        console.log('Sign up failed.');
+      }
+    } else {
+      console.error(xhr.statusText);
     }
-    await fetch('/api/auth/signup', {
-        body: JSON.stringify(credentials),
-        headers:{
-            "Content-type" : "application/json"
-        },
-        method: "POST"
-    } )
-    .then(response => response.json)
-    .then(path.resolve('/'), {loggedin:true})
-    .finally((error)=>{
-        console.log(error)
-    }
-    )
-}
 
-logInForm.addEventListener('submit', signup) 
+  };
+  xhr.onerror = () => {
+    console.error(xhr.statusText);
+  };
+  xhr.send(formData);
+});

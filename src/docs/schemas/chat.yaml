@@ -1,0 +1,18 @@
+components:
+  schemas:
+    Chat:
+      type: object
+      properties:
+        sender:
+          type: string
+          description: The name (in these case the Email) of the user.
+        message:
+          type: string
+          description: The message sent by the user.
+        createdAt:
+          type: Date
+          description: When the Message was created or posted.
+      example:
+        sender: ejemplo@ejemplo.com,
+        message: Hola todo bien?,
+        createdAt: date it was created}

@@ -1,7 +1,9 @@
 tags:
   - name: Products
-    description: Add, Get, Delete Products
+    description: Add, Get, Delete Products.
   - name: Users
-    description: Create and LogIn Users
+    description: Create and LogIn Users.
   - name: Carts
-    description: addProduct to Cart, deleteProduct from cart, get cart
+    description: Cart assosiated with the user, products can be added or removed.
+  - name: Chat
+    description: Chat based on WebSocket.

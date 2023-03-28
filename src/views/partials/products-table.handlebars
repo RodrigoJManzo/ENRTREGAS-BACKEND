@@ -3,17 +3,23 @@
     {{#if product.length}}
     <table class="productTable">
         <tr>
-            <th>Titulo</th>
-            <th>Precio</th>
+            <th>Title</th>
+            <th>descritpion</th>
+            <th>code</th>
+            <th>thumbnail</th>
+            <th>price</th>
             <th>Stock</th>
-            <th>Foto</th>
+            
         </tr>
         {{#each product}}
         <tr>
-            <td>{{title}}</td>
-            <td>${{price}}</td>
-            <td>{{stock}}</td>
+            <th>{{Title}}</th>
+            <th>{{descritpion}}</th>
+            <th>{{code}}</th>
             <td><img width="48" src={{thumbnail}} alt="image"></td>
+            <th>{{price}}</th>
+            <th>{{Stock}}</th>
+            
         </tr>
         {{/each}}
     </table>

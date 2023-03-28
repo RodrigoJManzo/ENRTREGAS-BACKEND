@@ -1,5 +1,4 @@
 import { Schema } from "mongoose";
-import { logger } from "../services/index.js";
 import bcrypt from 'bcrypt'
 
 const UserCollection = "users";
