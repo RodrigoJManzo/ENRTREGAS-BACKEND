@@ -1,6 +1,6 @@
 
 <h1>Chat</h1>
-<p>Logged in as {{email}}</p>
+<p>Logged as</p><p id="sender">{{email}}</p>
 
 <button type="button" onclick = 'window.location = "/"' id="homeBTN" class="homeBTN"><span>HOME</span></button>
 
@@ -8,9 +8,60 @@
 
 <form id="message-form">
 
-  <input type="text" id="messageBox" placeholder="Type your message here" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px;" />
+  <input type="text" id="messageBox" name="message" placeholder="Type your message here" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px;" />
 
-  <button id="send" title="Send Message!">Send Message</button>
+  <button type="submit" id="send" title="Send Message!">Send Message</button>
 
 </form>
-<script src="./client.js" type="module"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script >
+
+  const socket = io()
+
+  //Chat 
+  const chatForm = document.getElementById(`message-form`)
+  const chatContainer = document.getElementById(`messages`)
+  const sender = document.getElementById('sender').innerText
+  
+
+    //Escucho el fomulario de mensajes y tomo sus datos
+    //Emito los datos a mensaje Nuevo
+    chatForm.addEventListener('submit', (e) =>{
+        e.preventDefault()
+        const data = new FormData(chatForm)
+        const values = Object.fromEntries(data)
+        const message = {message: values.message, sender: sender}
+        console.log(message)
+        chatForm.reset()
+        socket.emit(`mensajeNuevo`, message)
+        console.log(`Mensaje Recibido`, message)
+    } )
+
+    //Esucho en todos los mensajes
+    socket.on(`todosMensajes`, allMsg =>{
+      muestraMensajes(allMsg)
+    })
+
+  //Renderizo los mensajes con la informacion obtenida del JSON y el template
+  const muestraMensajes = async (messages) =>{
+
+    function formatMessages(messages) {
+
+    let result = "";
+
+    for (let i = 0; i < messages.length; i++) {
+    const message = messages[i];
+    const { sender, message: text, createdAt } = message;
+
+    result += `${sender} (${createdAt}): ${text}\n\n`;
+    }
+
+    return result;
+  }
+
+    const messageString = formatMessages(messages)
+    chatContainer.innerHTML = messageString
+    chatContainer.scrollTop = chatContainer.offsetHeight
+    chatContainer.style.whiteSpace = "pre-wrap"
+  }
+</script>

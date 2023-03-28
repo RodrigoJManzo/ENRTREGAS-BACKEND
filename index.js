@@ -42,7 +42,7 @@ app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
 app.engine('.handlebars', engine({defaultLayout: 'main'}));
-app.use(express.static('./public/'));
+app.use(express.static('./public'));
 app.set("views", './src/views/');
 app.set('view engine', '.handlebars');
 app.use(express.json());
@@ -58,6 +58,9 @@ app.use('/api/docs', docRouter)
 import {Server as HttpServer} from "http"
 import {Server as IoServer  }from 'socket.io'
 import { ChatMongo } from "./src/Dao/chat/chatMongo.js";
+import dayjs from 'dayjs'
+
+const chatMongo = new ChatMongo
 
 const httpServer = new HttpServer(app)
 
@@ -72,7 +75,6 @@ const io = new IoServer(httpServer)
 
 
 io.on(`connection`, socket =>{
-  sendProductos(socket)
   sendMensajes(socket)
   console.log(`Cliente nuevo conectado`)
   socket.on(`mensajeNuevo`, mensajeNuevo=>{
@@ -81,7 +83,7 @@ io.on(`connection`, socket =>{
 })
 
 const sendMensajes = async (socket)=>{
-  const allMsg = await ChatMongo.getAll()
+  const allMsg = await chatMongo.getAll()
   socket.emit(`todosMensajes`, allMsg)
 }
 
@@ -89,9 +91,9 @@ const sendMensajes = async (socket)=>{
 const messageSaver = async (mensaje)=>{
   const date = new Date()
   const fechaFormato = dayjs(date).format(`DD/MM/YYYY hh:mm:ss`)
-  const newMensaje = {...mensaje, date: `${fechaFormato} hs `}
-  await ChatMongo.save(newMensaje)
-  const messages = await ChatMongo.getAll()
+  const mongoMesagge = {sender: mensaje.sender , message: mensaje.message, createdAt: fechaFormato}
+  await chatMongo.save(mongoMesagge)
+  const messages = await chatMongo.getAll()
   io.sockets.emit(`todosMensajes`, messages)}
 
 
