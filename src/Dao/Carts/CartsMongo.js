@@ -1,6 +1,10 @@
 import { MongoDBContainer } from "../../Containers/index.js";
 import { CartModel } from "../../models/index.js";
 
+/**
+ * extending the class allows us to use all the methods in that DBsystem
+ */
+
 export class CartsMongo extends MongoDBContainer {
   constructor() {
     super({

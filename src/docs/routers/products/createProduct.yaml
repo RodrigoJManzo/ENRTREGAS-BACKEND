@@ -10,7 +10,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/requestBodies/NewProduct"
-        responses:
+      responses:
           "201":
             description: Sucsses PRODUCT CREATED
             content:

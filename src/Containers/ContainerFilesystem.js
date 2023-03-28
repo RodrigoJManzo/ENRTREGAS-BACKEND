@@ -4,7 +4,10 @@ class ContainerFilesystem {
   constructor(fileName) {
     this.filePath = `./src/db/${fileName}.json`;
   }
-
+/**
+ * 
+ * @returns creates a .json file to be used as Data base for FileSystem and sets the methods for handling the data
+ */
   async getAll() {
     try {
       const file = await fs.promises.readFile(this.filePath, "utf8");
@@ -18,6 +21,7 @@ class ContainerFilesystem {
       }
       console.log(error);
     }
+
   }
 
   async save(element) {

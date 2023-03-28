@@ -5,6 +5,12 @@ import {
 } from "../../utils/index.js";
 import {logger} from '../../services/index.js'
 
+/**
+ * 
+ * @param {requires the data from the body and with tath data sets the user} req 
+ * @param {sends the product or the correct response in case of error} res 
+ * 
+ */
 
 const getAll = async (req, res) => {
   try {

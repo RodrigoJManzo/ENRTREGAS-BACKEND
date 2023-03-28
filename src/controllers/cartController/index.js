@@ -2,6 +2,14 @@ import { CartDao, ProductDao } from "../../Dao/index.js";
 import { logger } from "./../../services/index.js";
 import {DATE_UTILS} from "../../utils/date-utils.js"
 
+
+/**
+   * @addProductToCart adds a product givven the cart Id in params and the ProductId from Body
+   * @getCart gets all the carts listed on the DB
+   * @createCart creates a cart, this method is used inside the SignUp function, and adds a cart to a user.
+   * @deleteProductById deletes a product given the CartId in params and the Product ID forom Body
+*/
+
 const getCart = async (req, res) => {
   const { id } = req.params;
    const cart = await CartDao.getById(id);
@@ -18,8 +26,6 @@ const createCart = async (req, res) => {
   return({cartId: cart.id });
   
 };
-
-
 
 const addProductToCart = async (req, res) => {
   const { productId } = req.body;
@@ -57,7 +63,6 @@ const addProductToCart = async (req, res) => {
 };
 
 const deleteProductById = async (req , res) =>{
-
   const {cartId} = req.params
   const {productId} = req.body
 
@@ -89,4 +94,5 @@ export {
     getCart,
     createCart,
     deleteProductById,
+    
  };

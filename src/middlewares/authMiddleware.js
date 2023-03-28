@@ -2,6 +2,12 @@ import { UserDao } from "../Dao/index.js"
 import { logger } from "../services/index.js"
 import { jsonWtUtils } from "../utils/jsonWtUtils.js"
 
+/**
+ * 
+ * @param {cookies.cookieUser and proves if the user is logged in} req 
+ * @param {depending on the cookies.cookieUser the answer could be succsess or an error} res 
+ * @param {next allows the function to be passed as an middleware and lets the course of the route to go on} next 
+ */
 const tokenValid = async (req, res, next) =>{
     try {
         

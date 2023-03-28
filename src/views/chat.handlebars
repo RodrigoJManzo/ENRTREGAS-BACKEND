@@ -18,14 +18,13 @@
 
   const socket = io()
 
-  //Chat 
+
   const chatForm = document.getElementById(`message-form`)
   const chatContainer = document.getElementById(`messages`)
   const sender = document.getElementById('sender').innerText
   
 
-    //Escucho el fomulario de mensajes y tomo sus datos
-    //Emito los datos a mensaje Nuevo
+    
     chatForm.addEventListener('submit', (e) =>{
         e.preventDefault()
         const data = new FormData(chatForm)
@@ -37,12 +36,12 @@
         console.log(`Mensaje Recibido`, message)
     } )
 
-    //Esucho en todos los mensajes
+  
     socket.on(`todosMensajes`, allMsg =>{
       muestraMensajes(allMsg)
     })
 
-  //Renderizo los mensajes con la informacion obtenida del JSON y el template
+  
   const muestraMensajes = async (messages) =>{
 
     function formatMessages(messages) {

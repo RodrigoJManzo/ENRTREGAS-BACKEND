@@ -1,29 +1,33 @@
 const loginForm = document.getElementById("loginForm");
 
+
+
+/**
+ * @loginForm listens a submit event on logIn and brings the formData 
+ * @xhr Creates an XMLHttpRequest object
+ *  then sets up the request
+ *  then sets up the callback function for when the request is completes
+ *  then handles susccessfull and unsuccessful logins
+ */
+
 loginForm.addEventListener("submit", (event) => {
-  event.preventDefault(); // Prevent the default form submission behavior
-  
-  const formData = new FormData(loginForm); // Get form data
-  
-  // Create an XMLHttpRequest object
+
+  event.preventDefault(); 
+  const formData = new FormData(loginForm); 
   const xhr = new XMLHttpRequest();
 
-  // Set up the request
   xhr.open("POST", "/api/auth");
   xhr.setRequestHeader("Content-Type", "application/json");
-
-  // Set up a callback function for when the request completes
   xhr.onload = () => {
     if (xhr.status === 200) {
-      // Handle successful login
-      window.location.href = "/"; // Redirect to home page
+      
+      window.location.href = "/"; 
     } else {
-      // Handle unsuccessful login
-      console.log("Invalid email or password. Please try again."); // Show error message
+     
+      console.log("Invalid email or password. Please try again.");
     }
   };
 
-  // Send the request with the form data as JSON
   const data = JSON.stringify({
     email: formData.get("email"),
     password: formData.get("password")

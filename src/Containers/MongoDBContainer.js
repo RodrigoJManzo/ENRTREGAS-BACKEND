@@ -4,7 +4,10 @@ class MongoDBContainer {
   constructor({ name, schema }) {
     this.model = mongoose.model(name, schema);
   }
-
+/**
+ * 
+ * @returns a MongoDb Container that can be extended through the DAO and the methods to be used for handling the information
+ */
   async getAll() {
     const response = await this.model.find().lean();
     return response;

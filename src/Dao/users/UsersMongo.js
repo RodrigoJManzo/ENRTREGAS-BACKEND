@@ -15,5 +15,9 @@ export class UsersMongo extends MongoDBContainer {
     return isMatch;
   }
 
+/**
+ *@UsersMongo extends MongoDBContainer and gives us all the methods to be used for handling the data
+ *@matchPassword compares the password given to the stored and gets if its the same 
+ */
 
 }

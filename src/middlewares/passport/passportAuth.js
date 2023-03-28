@@ -7,7 +7,11 @@ import {logger} from '../../services/index.js';
 
 
 const init = ( ) =>{
-
+/**
+ * @serialize
+ * @deserialize
+  serialices the data in order of hidding it from plain site and prevent data leak
+ */
   passport.serializeUser((user,done)=>{
     done(null, user.id)
     console.log(user.id)

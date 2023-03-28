@@ -1,5 +1,5 @@
 import express from "express";
-import { renderChat, getChat, logOut } from "../../controllers/index.js";
+import  {renderChat}  from "../../controllers/index.js";
 import { tokenValid } from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();

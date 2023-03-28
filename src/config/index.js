@@ -3,7 +3,13 @@ dotenv.config();
 
 const PRODUCTS_FILENAME = "products";
 const CARTS_FILENAME = "carts";
-
+/**
+ * @config sets the variables in wich our server can run
+ * it sets:
+ * -PORT
+ * -Data Base for usage
+ * -Nodemaile config
+ */
 const config = {
   SERVER: {
     PORT: process.env.PORT || 8080,

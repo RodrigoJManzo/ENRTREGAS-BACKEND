@@ -24,10 +24,6 @@ const signUp =  async (req, res) => {
 
     const {name, lastname, age, number, email, password} = req.body
 
-    const data = {name, lastname, age, number, email, password}
-
-    console.log(`This is what im getting ${data.name}`)
-
     try {
       const validated = await JOI_VALIDATOR.user.validateAsync({
         name,

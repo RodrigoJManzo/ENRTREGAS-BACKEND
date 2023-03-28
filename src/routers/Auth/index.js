@@ -9,7 +9,6 @@ router.get("/", (req, res)=>{
     try {
         const user = req.user.email
         res.render('home', {user: user})
-        console.log(user)
     } catch (error) {
         res.render('home')
     }

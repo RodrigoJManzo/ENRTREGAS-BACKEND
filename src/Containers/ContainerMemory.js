@@ -2,7 +2,9 @@ class ContainerMemory {
   constructor() {
     this.elements = [];
   }
-
+/**
+ * @constructor sets an array in memory to be used as DB, and sets the methos in wich container can be used for handling data.
+ */
   getAll() {
     return this.elements;
   }
