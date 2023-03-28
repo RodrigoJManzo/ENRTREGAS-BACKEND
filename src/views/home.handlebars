@@ -6,12 +6,9 @@
 
     <button type="button" onclick= 'window.location = "/api/auth/signup"' id="signupBTN" class="homeBTN"><span>Sign Up</span></button>
 
-    <button type="button" onclick= 'window.location = "/api/docs"' id="docsBTN" class="homeBTN"><span>Documentation</span></button>
 
-    <button type="button" onclick= 'window.location = "/chat"' id="chatBTN" class="homeBTN"><span>Chat</span></button>
-
-    {{#if isLoggedIn}}
-        {{> products-table}}
+    {{#if user}}
+        {{> extraButtons}}
     {{/if}}
     
 </div>
