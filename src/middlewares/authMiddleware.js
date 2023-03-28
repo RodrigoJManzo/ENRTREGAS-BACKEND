@@ -9,6 +9,7 @@ const tokenValid = async (req, res, next) =>{
 
 
         if(!tokenGood){
+            logger.log("warn", "NOT AUTHORIZED -TOKEN NOT PRESENT")
             throw new Error ('NOT AUTHORIZED TOKEN NOT PRESENT')
         }
 
@@ -29,7 +30,7 @@ const tokenValid = async (req, res, next) =>{
 
     } catch (error) {
         logger.log('warn',error.message)
-        res.status(401).send("NOT AUTHORIZED")
+        res.redirect("/");
         }
 
         

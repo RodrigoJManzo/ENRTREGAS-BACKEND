@@ -38,7 +38,7 @@ const signUp =  async (req, res) => {
         password
       })  
       if (validated){
-        logger.log(`info`, `User data Validated`)
+        logger.log(`info`, `User data being Validated`)
       }    
     } catch (error) {
       res.status(422, error.message)

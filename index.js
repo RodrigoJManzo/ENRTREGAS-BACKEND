@@ -59,8 +59,6 @@ import  {createServer} from "http";
 const websocketServer = createServer(app)
 const wss = new WebSocketServer({ noServer:true, websocketServer})
 
-console.log(wss)
-
 wss.on('connection', function conection (ws){
   ws.on('message', function incoming(data){
     wss.clients.forEach(function each(client){
