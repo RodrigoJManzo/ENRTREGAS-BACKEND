@@ -1,16 +1,18 @@
 import { ChatMongo } from "../../src/Dao/chat/chatMongo.js"
 
-const chatMongo = new ChatMongo
-const messages = await chatMongo.getAll()
+const chatMongo = new ChatMongo();
 
-export const socketEvent = (io) =>{
-    io.on('connection', socket =>{
-      io.sockets.emit('messages', messages)
-      socket.on('chat', async chat =>{
-        const messasge = ChatMongo.save(chat)
-        const uptatedMessages = await ChatMongo.getAll()
-        io.sockets.emit('messages', uptatedMessages)
-      })
-    })
-  }
-  
+const socketEvent = (io) => {
+  io.on("connection", async (socket) => {
+    const messages = await chatMongo.getAll();
+    io.sockets.emit("messages", messages);
+
+    socket.on("chat", async (chat) => {
+      await chatMongo.save(chat);
+      const updatedMessages = await chatMongo.getAll();
+      io.sockets.emit("messages", updatedMessages);
+    });
+  });
+};
+
+export { socketEvent };

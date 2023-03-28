@@ -1,7 +1,7 @@
 import express from "express";
 import {engine} from "express-handlebars"
 import { config } from "./src/config/index.js";
-import { ProductRouter, CartRouter, AuthRouter, docRouter} from "./src/routers/index.js";
+import { ProductRouter, CartRouter, AuthRouter, docRouter,chatRouter} from "./src/routers/index.js";
 import session from "express-session"
 import {PassportAuth} from './src/middlewares/index.js'
 import passport from "passport";
@@ -54,23 +54,22 @@ app.use("/", AuthRouter)
 app.use("/chat", chatRouter)
 app.use('/api/docs', docRouter)
 
-import {Server as IOServer} from "socket.io"
-import { createServer as HttpServer } from "http";
-import { chatRouter } from "./src/routers/chat/chatRouter.js";
-import { socketEvent } from "./public/chat/event.js";
+import {WebSocketServer} from "ws"
+import  {createServer} from "http";
+const websocketServer = createServer(app)
+const wss = new WebSocketServer({ noServer:true, websocketServer})
 
+console.log(wss)
 
-const httpServer = new HttpServer(app)
-
-export const io = new IOServer(httpServer)
-
-socketEvent(io)
-
-
-httpServer.listen(config.SERVER.WEBSOCKET_PORT, ()=>{
-  console.log(`WebSocket server running on port ${config.SERVER.WEBSOCKET_PORT}`)
+wss.on('connection', function conection (ws){
+  ws.on('message', function incoming(data){
+    wss.clients.forEach(function each(client){
+      if(client != ws  && client.readyState == WebSocket.OPEN){
+        client.send(data)
+      }
+    })
+  })
 })
-
 
 const server = app.listen(config.SERVER.PORT, () =>
    console.log(`Server running on port ${server.address().port} /// Info avaliable on /api/docs`)

@@ -1,25 +1,27 @@
-import  io  from "../.."
-const socket = io("http://localhost:3000")
+import io from 'socket.io-client'
 
-const chatForm = document.getElementById('message-form')
-const chatContainer = document.getElementById('messages')
+const socket = io("http://localhost:3000");
 
-chatForm.addEventListener('submit', (e)=>{
-  e.preventDefault()
-  const data =  new FormData(chatForm)
-  const values = Object.fromEntries(data)
-  chatForm.reset()
-  socket.emit('message', values)
-  ChatMongo.save(values)
-})
+const chatForm = document.getElementById("message-form");
+const chatContainer = document.getElementById("messages");
 
-socket.on('messages', allMsg => {showMessages(allMsg)})
+chatForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = new FormData(chatForm);
+  const values = Object.fromEntries(data);
+  chatForm.reset();
+  socket.emit("chat", values);
+});
 
-const showMessages = async (messages) =>{
-  const res = await ChatModel.getAll()
-  const template = await res.message
-  const compiled = Handlebars.compile(template)
-  const html = compiled({messages})
-  chatContainer.innerHTML = html
-  chatContainer.scrollTop = chatContainer.offsetHeight
-}
+socket.on("messages", (allMsg) => {
+  showMessages(allMsg);
+});
+
+const showMessages = (messages) => {
+  chatContainer.innerHTML = "";
+  messages.forEach((message) => {
+    const div = document.createElement("div");
+    div.textContent = `${message.author}: ${message.text}`;
+    chatContainer.appendChild(div);
+  });
+};
