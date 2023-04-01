@@ -1,5 +1,5 @@
 paths:
-  /api/cart//cartOrder/:userId:
+  /api/cart/cartOrder/:userId:
     get:
       summary: Get the buy order from the Cart attached to the User provided and sends a Email to the buyer. 
       tags:
