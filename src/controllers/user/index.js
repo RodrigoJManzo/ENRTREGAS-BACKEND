@@ -1,28 +1,25 @@
 import { UserDao } from "../../Dao/index.js";
-import {createCart} from '../cartController/index.js'
-import {JOI_VALIDATOR, jsonWtUtils} from '../../utils/index.js'
+import { createCart } from "../cartController/index.js";
+import { JOI_VALIDATOR, jsonWtUtils } from "../../utils/index.js";
 import { createTransport } from "nodemailer";
-import { config} from "../../config/index.js"
+import { config } from "../../config/index.js";
 import { logger } from "../../services/index.js";
 
-const signUp =  async (req, res) => {
-
+const signUp = async (req, res) => {
   const transporter = createTransport({
-    host: 'smtp.ethereal.email',
+    host: "smtp.ethereal.email",
     port: 587,
     auth: {
-        user: config.NODEMAILER.Username,
-        pass: config.NODEMAILER.Password,
+      user: config.NODEMAILER.Username,
+      pass: config.NODEMAILER.Password,
     },
     tls: {
-      rejectUnauthorized: false
-  }
-});
-
+      rejectUnauthorized: false,
+    },
+  });
 
   try {
-
-    const {name, lastname, age, number, email, password} = req.body
+    const { name, lastname, age, number, email, password } = req.body;
 
     try {
       const validated = await JOI_VALIDATOR.user.validateAsync({
@@ -31,30 +28,37 @@ const signUp =  async (req, res) => {
         age,
         number,
         email,
-        password
-      })  
-      if (validated){
-        logger.log(`info`, `User data being Validated`)
-      }    
+        password,
+      });
+      if (validated) {
+        logger.log(`info`, `User data being Validated`);
+      }
     } catch (error) {
-      res.status(422, error.message)
+      res.status(422, error.message);
     }
 
     try {
-       const exist = await UserDao.getOne({email:email})
-       if(exist){
-        logger.log('USER ALREADY IN DATABASE', exist)
-        return('user already exist', res.send(`user already exists - User is = ${exist.email} and cart = ${exist.cart}`))
-       }
+      const exist = await UserDao.getOne({ email: email });
+      if (exist) {
+        logger.log("USER ALREADY IN DATABASE", exist);
+        return (
+          "user already exist",
+          res.send(
+            `user already exists - User is = ${exist.email} and cart = ${exist.cart}`
+          )
+        );
+      }
     } catch (error) {
-      console.log(error)      
-    } if (name || lastname || email){}
+      console.log(error);
+    }
+    if (name || lastname || email) {
+    }
 
     const mailOptions = {
-      from: 'MongoDb Entrega Final de Coderhouse Backend',
+      from: "MongoDb Entrega Final de Coderhouse Backend",
       to: email,
       subject: "Mail de aviso de Login",
-      html:`
+      html: `
       
       <h1>Se Ha Logueado</h1>
 
@@ -85,43 +89,42 @@ const signUp =  async (req, res) => {
           <td class="tg-9wq8">${email}</td>
         </tr>
       </tbody>
-      </table>`
-  }
-    const info = await transporter.sendMail(mailOptions)
-    logger.info(info)
+      </table>`,
+    };
+    const info = await transporter.sendMail(mailOptions);
+    logger.info(info);
 
-    if(!name || !lastname || !age || !number|| !email || !password)
-    return res.send({success: false})
-    const cart = await createCart()
-    const user = {name, lastname, age, number,email,password, cart}
-    await UserDao.save(user)
+    if (!name || !lastname || !age || !number || !email || !password)
+      return res.send({ success: false });
+    const cart = await createCart();
+    const user = { name, lastname, age, number, email, password, cart };
+    await UserDao.save(user);
 
-    res.send({success:true})
-
+    res.send({ success: true });
   } catch (error) {
-    logger.error('error', error)
+    logger.error("error", error);
   }
 };
 
+const logIn = async (req, res, next) => {
+  const { user } = req;
 
-const logIn = async (req, res, next)=>{
-    const {user} = req
+  const token = jsonWtUtils.createToken(user, "secret");
 
-    const token = jsonWtUtils.createToken(user, 'secret')
+  res.cookie("cookieUser", token, { maxAge: 60000, expires: true });
 
-    res.cookie('cookieUser', token, { maxAge: 60000, expires: true})
+  logger.log("info", "USER LOGGED IN");
 
-    logger.log('info','USER LOGGED IN')
+  res.send({ success: true, message: "logged In", user: req.user, token });
 
-    res.send({success: true, message: "logged In", user:req.user , token})
+  next = () => {
+    if (res.status === 200) {
+      res.redirect("/");
+    } else
+      (error) => {
+        logger.error(error);
+      };
+  };
+};
 
-    next=()=>{
-      if(res.status === 200){res.redirect('/')
-    }else(error)=>{
-      logger.error(error)
-    }
-  }
-}
-
-
-export {signUp, logIn}
+export { signUp, logIn };

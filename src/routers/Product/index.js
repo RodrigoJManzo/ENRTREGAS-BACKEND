@@ -4,8 +4,7 @@ import { tokenValid } from "../../middlewares/authMiddleware.js";
 
 const router = Router();
 
-
-router.get("/",tokenValid, ProductController.getAll);
+router.get("/", tokenValid, ProductController.getAll);
 
 router.get("/:id", tokenValid, ProductController.getById);
 

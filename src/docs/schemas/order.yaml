@@ -1,0 +1,10 @@
+components:
+  schemas:
+    Order:
+      type: string
+      properties:
+        description:
+          type: string
+          description: The total price of the objects inside a especiffic cart that is attached to the User.
+      example:
+        descriptiopn: The total Price of the objects in cart is $ xxxxx

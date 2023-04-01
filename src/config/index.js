@@ -27,9 +27,9 @@ const config = {
     },
   },
   NODEMAILER : {
-    Name:	'Walter Aufderhar',
-    Username:	'walter.aufderhar@ethereal.email',
-    Password:	'qhutKFMhn5mZ3BnPSC',
+    Name:	'Milan Sipes',
+    Username:	'milan34@ethereal.email',
+    Password:	'yKm9zSv6fXN9mGtmAw',
   }
 };
 

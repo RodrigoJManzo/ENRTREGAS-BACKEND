@@ -1,72 +1,62 @@
-import passport from 'passport';
-import {Strategy as LocalStrategy} from 'passport-local'
-import { UserDao } from '../../Dao/index.js';
-import { UsersMongo } from '../../Dao/users/UsersMongo.js';
-import {logger} from '../../services/index.js';
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import { UserDao } from "../../Dao/index.js";
+import { UsersMongo } from "../../Dao/users/UsersMongo.js";
+import { logger } from "../../services/index.js";
 
-
-
-const init = ( ) =>{
-/**
+const init = () => {
+  /**
  * @serialize
  * @deserialize
   serialices the data in order of hidding it from plain site and prevent data leak
  */
-  passport.serializeUser((user,done)=>{
-    done(null, user.id)
-    console.log(user.id)
-  })
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
+    console.log(user.id);
+  });
 
-  passport.deserializeUser(async (id,done)=>{
+  passport.deserializeUser(async (id, done) => {
     try {
       const user = await UserDao.getOne({ _id: id });
-      done(null,user)
+      done(null, user);
     } catch (error) {
-      logger.log(error)
+      logger.log(error);
     }
-  })
+  });
 
-  passport.use('login', new LocalStrategy(
-    {
-      usernameField: 'email',
-      passwordField: 'password',
-      passReqToCallback: true,
-      
-    }, async (req, email, password, done) =>{
-      
-      try {
-        if(!email || !password) return done(null, false)
+  passport.use(
+    "login",
+    new LocalStrategy(
+      {
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true,
+      },
+      async (req, email, password, done) => {
+        try {
+          if (!email || !password) return done(null, false);
 
-        const userObj = new UsersMongo()
-        const user = await UserDao.getOne({email: email})
-        
-        const isMatch =  await userObj.matchPassword(password, user.password)
+          const userObj = new UsersMongo();
+          const user = await UserDao.getOne({ email: email });
 
-        if(isMatch) return done(null, user)
+          const isMatch = await userObj.matchPassword(password, user.password);
 
-        const userResponse = {
-          id: user._id,
-          email: user.email,
-          cart: user.cart
+          if (isMatch) return done(null, user);
+
+          const userResponse = {
+            id: user._id,
+            email: user.email,
+            cart: user.cart,
+          };
+
+          done(null, userResponse);
+        } catch (error) {
+          logger.log(error);
+          done(error);
         }
-
-        done (null, userResponse)
-
-      } catch (error) {
-        logger.log(error);
-        done(error)
       }
-    }
-  ))
-}
+    )
+  );
+};
 
-
-
-
-
-
-export const PassportAuth = {init}
-
-
-
-   
+export const PassportAuth = { init };

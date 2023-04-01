@@ -4,10 +4,10 @@ class MongoDBContainer {
   constructor({ name, schema }) {
     this.model = mongoose.model(name, schema);
   }
-/**
- * 
- * @returns a MongoDb Container that can be extended through the DAO and the methods to be used for handling the information
- */
+  /**
+   *
+   * @returns a MongoDb Container that can be extended through the DAO and the methods to be used for handling the information
+   */
   async getAll() {
     const response = await this.model.find().lean();
     return response;
@@ -15,7 +15,7 @@ class MongoDBContainer {
 
   async save(element) {
     const response = await this.model.create(element);
-    console.log(response)
+    console.log(response);
     return response;
   }
 
@@ -42,8 +42,7 @@ class MongoDBContainer {
     return response;
   }
 
-
-   async updateStockByCode (code, stock) {
+  async updateStockByCode(code, stock) {
     try {
       const updatedProduct = await this.model.findOneAndUpdate(
         { code },
@@ -54,27 +53,25 @@ class MongoDBContainer {
     } catch (error) {
       throw new Error(`Error updating stock: ${error.message}`);
     }
-  };
-  
-  async getByCode (code) {
+  }
+
+  async getByCode(code) {
     try {
       const product = await this.model.findOne({ code });
       return product;
     } catch (error) {
       throw new Error(`Error getting product by code: ${error.message}`);
     }
-  };
+  }
 
-  async updateStock (id, newStock) {
+  async updateStock(id, newStock) {
     const result = await this.model.updateOne(
       { _id: id },
       { $set: { stock: newStock } }
-      
-    )
-    console.log(`id ${id} and stock ${newStock}`)
+    );
+    console.log(`id ${id} and stock ${newStock}`);
     return result.nModified;
-  };
-
+  }
 }
 
 export { MongoDBContainer };

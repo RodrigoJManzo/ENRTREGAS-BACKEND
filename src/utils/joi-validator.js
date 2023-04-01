@@ -10,14 +10,13 @@ const product = joi.object({
   timestamp: joi.string().required(),
 });
 
-
 const user = joi.object({
-    name: joi.string().min(3).max(100).required(),
-    lastname: joi.string().min(3).max(100).required(),
-    email: joi.string().min(3).max(89).required(),
-    age:joi.number().required(),
-    number:joi.number().required(),
-    password: joi.string().min(3).max(150).required(),
-})
+  name: joi.string().min(3).max(100).required(),
+  lastname: joi.string().min(3).max(100).required(),
+  email: joi.string().min(3).max(89).required(),
+  age: joi.number().required(),
+  number: joi.number().required(),
+  password: joi.string().min(3).max(150).required(),
+});
 
 export const JOI_VALIDATOR = { product, user };

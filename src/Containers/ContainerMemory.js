@@ -2,9 +2,9 @@ class ContainerMemory {
   constructor() {
     this.elements = [];
   }
-/**
- * @constructor sets an array in memory to be used as DB, and sets the methos in wich container can be used for handling data.
- */
+  /**
+   * @constructor sets an array in memory to be used as DB, and sets the methos in wich container can be used for handling data.
+   */
   getAll() {
     return this.elements;
   }
@@ -23,7 +23,7 @@ class ContainerMemory {
   getById(id) {
     return this.elements.find((element) => element.id === id);
   }
-  
+
   updateById(id, newData) {
     const elementIndex = this.elements.findIndex((element) => element.id == id);
 

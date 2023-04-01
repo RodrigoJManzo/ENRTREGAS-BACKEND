@@ -1,7 +1,11 @@
 import { config } from "../config/index.js";
 import { MongoDBService } from "../services/index.js";
 import { CartsMongo, CartsFilesystem, CartsMemory } from "./Carts/index.js";
-import {  ProductsMongo,  ProductsFilesystem,  ProductsMemory,} from "./Products/index.js";
+import {
+  ProductsMongo,
+  ProductsFilesystem,
+  ProductsMemory,
+} from "./Products/index.js";
 import { UsersMongo } from "./users/UsersMongo.js";
 
 const getSelectedDaos = () => {
@@ -18,14 +22,14 @@ const getSelectedDaos = () => {
       return {
         ProductDao: new ProductsFilesystem(),
         CartDao: new CartsFilesystem(),
-        UserDao: new UsersMongo()
+        UserDao: new UsersMongo(),
       };
     }
     case "memory": {
       return {
         ProductDao: new ProductsMemory(),
         CartDao: new CartsMemory(),
-        UserDao: new UsersMongo()
+        UserDao: new UsersMongo(),
       };
     }
   }

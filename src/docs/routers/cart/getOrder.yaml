@@ -1,0 +1,18 @@
+paths:
+  /api/cart//cartOrder/:userId:
+    get:
+      summary: Get the buy order from the Cart attached to the User provided and sends a Email to the buyer. 
+      tags:
+        - Carts
+      parameters:
+          description: Gets the Total price and the details of the buy.
+      responses:
+          "200":
+            description: Gets the total price. 
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: "#/components/schemas/Order"
+          "404":
+            description: REQUEST ERROR
